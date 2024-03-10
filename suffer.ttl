@@ -1,0 +1,74 @@
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX prof: <http://www.w3.org/ns/dx/prof/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX role: <http://www.w3.org/ns/dx/prof/role/>
+PREFIX schema: <https://schema.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+<http://w3id.org/suffer>
+    a
+        owl:Ontology ,
+        prof:Profile ;
+    dcterms:provenance "This profile of GeoSPARQL was made to satisfy various projects' needs in 2023 - 2024"@en ;
+    owl:versionIRI <http://w3id.org/suffer/0.0.1> ;
+    owl:versionInfo "0.0.1" ;
+    prof:hasResource
+        [
+            rdfs:label "Ontology" ;
+            dcterms:format "text/turtle" ;
+            rdfs:comment "An ontology that builds on elements of GeoSPARQL 1.1 (https://docs.ogc.org/is/22-047r1/22-047r1.html) to cater for spatial fuzziness and uncertainty and which allows for probabilistic topological functions"@en ;
+            prof:hasArtifact "https://w3id.org/suffer"^^xsd:anyURI ;
+            prof:hasRole role:schema ;
+        ] ,
+        [
+            rdfs:label "Ontology Documentation" ;
+            dcterms:format "text/html" ;
+            rdfs:comment "Documentation for the ontology in HTML, web page, form"@en ;
+            prof:hasArtifact "https://w3id.org/suffer.html"^^xsd:anyURI ;
+            prof:hasRole role:guidance ;
+        ] ,
+        [
+            rdfs:label "Code Repository" ;
+            rdfs:comment "An online version control repository that contains this Profile's content in files" ;
+            prof:hasArtifact "https://w3id.org/suffer/repo"^^xsd:anyURI ;
+            prof:hasRole role:repository ;
+        ] ;
+    prof:isProfileOf <http://www.opengis.net/ont/geosparql> ;
+    schema:codeRepository "https://github.com/nicholascar/suffer-ont/"^^xsd:anyURI ;
+    schema:copyrightHolder <https://orcid.org/0000-0002-8742-7730> ;
+    schema:copyrightNotice "(c) Nicholas Car, 2024" ;
+    schema:copyrightYear "2024"^^xsd:gYear ;
+    schema:creator <https://orcid.org/0000-0002-8742-7730> ;
+    schema:dateCreated "2024-03-10"^^xsd:date ;
+    schema:dateIssued "2024-03-11"^^xsd:date ;
+    schema:dateModified "2024-03-11"^^xsd:date ;
+    schema:description "An ontology that builds on elements of GeoSPARQL 1.1 to cater for spatial fuzziness and uncertainty and which allows for probabilistic topological functions"@en ;
+    schema:license "https://opensource.org/license/BSD-3-clause"^^xsd:anyURI ;
+    schema:name "SUFFER Ontology"@en ;
+    schema:publisher <https://orcid.org/0000-0002-8742-7730> ;
+.
+
+<https://kurrawong.ai>
+    a schema:Organization ;
+    schema:description "KurrawongAI is a small Artificial Intelligence company in Australia specialising in Knowledge Graphs." ;
+    schema:name "Kurrawong AI" ;
+    schema:url "https://kurrawong.ai"^^xsd:anyURI ;
+.
+
+<https://linked.data.gov.au/org/anu>
+    a schema:Organization ;
+    schema:name "Australian National University" ;
+    schema:description "ANU is a world-leading university in Australia’s capital" ;
+    schema:url "https://www.anu.edu.au"^^xsd:anyURI ;
+.
+
+<https://orcid.org/0000-0002-8742-7730>
+    a schema:Person ;
+    schema:affiliation <https://kurrawong.ai> , <https://linked.data.gov.au/org/anu> ;
+    schema:email "nick@kurrawong.ai"^^xsd:anyURI ;
+    schema:name "Nicholas J. Car"@en ;
+.
+
+
+
