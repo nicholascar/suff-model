@@ -20,12 +20,12 @@ NOTE: It is hoped that some form of this ontology will become part of the 2024/2
 
 Please contact the author for more information:
 
-**Nicholas J. Car**
-*Data Architect*
-KurrawongAI
-<nick@kurrawong.ai>
-<https://kurrawong.ai>
+*Nicholas J. Car* +
+_Data Architect_ +
+KurrawongAI +
+nick@kurrawong.ai +
+https://kurrawong.ai +
 &
-Australian National University
-<nicholas.car@anu.edu.au>
-<https://researchers.anu.edu.au/researchers/car-n>
+Australian National University +
+nicholas.car@anu.edu.au +
+https://researchers.anu.edu.au/researchers/car-n +
