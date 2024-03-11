@@ -8,7 +8,7 @@ This ontology is described in the forthcoming paper submitted to [GeoLD2024](htt
 
 The ontology is available in RDF within this repository - `suffer.ttl` and online in documented form at:
 
-* https://w3id.org/suffer - _not there yet!_
+* https://nicholascar.github.io/suffer-ont/[https://w3id.org/suffer]
 
 == License & Use
 
