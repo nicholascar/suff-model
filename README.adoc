@@ -4,7 +4,7 @@ This repository contains the source code for an ontology that extends https://do
 
 This ontology is described in the forthcoming paper submitted to [GeoLD2024](https://i3mainz.github.io/GeoLD2024/), the 4th International Workshop on Geospatial Linked Data at [ESWC 2024](https://2024.eswc-conferences.org) in May 2024:
 
-* https://github.com/nicholascar/geold24-suffer[Representing geometric fuzziness and allowing for probabilistic topological functions with an extension to GeoSPARQL - SUFFER]
+* https://github.com/nicholascar/geold24-suffer[SUFFER @ GeoLD '24]
 
 The ontology is available in RDF within this repository - `suffer.ttl` and online in documented form at:
 
@@ -25,7 +25,7 @@ _Data Architect_ +
 KurrawongAI +
 nick@kurrawong.ai +
 https://kurrawong.ai +
-&
+& +
 Australian National University +
 nicholas.car@anu.edu.au +
 https://researchers.anu.edu.au/researchers/car-n +

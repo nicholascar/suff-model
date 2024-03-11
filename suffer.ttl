@@ -5,6 +5,13 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX role: <http://www.w3.org/ns/dx/prof/role/>
 PREFIX schema: <https://schema.org/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX : <https://w3id.org/suffer/>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX ont: <https://w3id.org/suffer>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX vann: <http://purl.org/vocab/vann/>
 
 <http://w3id.org/suffer>
     a
@@ -47,6 +54,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
     schema:license "https://opensource.org/license/BSD-3-clause"^^xsd:anyURI ;
     schema:name "SUFFER Ontology"@en ;
     schema:publisher <https://orcid.org/0000-0002-8742-7730> ;
+    vann:preferredNamespacePrefix "suffer" ;
 .
 
 <https://kurrawong.ai>
@@ -69,6 +77,4 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
     schema:email "nick@kurrawong.ai"^^xsd:anyURI ;
     schema:name "Nicholas J. Car"@en ;
 .
-
-
 

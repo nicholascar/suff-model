@@ -1,0 +1,45 @@
+PREFIX : <https://w3id.org/suffer/>
+
+#
+#   Classes
+#
+
+vg:VirtualGraph
+    a owl:Class ;
+    rdfs:isDefinedBy <https://pid.kurrawong.ai/vg> ;
+    skos:definition """A Graph that is an alias for other Graphs and may not contain triples"""@en ;
+    skos:prefLabel "Virtual Graph"@en ;
+    skos:example """
+        PREFIX vg: <https://pid.kurrawong.ai/vg/>
+        PREFIX sdo: <https://schema.org>
+
+        <http://example/graph/X>
+            a vg:VirtualGraph
+            sdo:name "Virtual Graph X" ;
+        .
+    """ ;
+.
+
+
+#
+#   Predicates
+#
+
+vg:isAliasFor
+    a owl:ObjectProperty ;
+    rdfs:isDefinedBy <https://pid.kurrawong.ai/vg> ;
+    rdfs:domain vg:VirtualGraph ;
+    rdfs:range vg:Graph ;
+    skos:definition """A Virtual Graph is an alias for a Graph"""@en ;
+    skos:prefLabel "is alias for"@en ;
+    skos:example """
+        PREFIX vg: <https://pid.kurrawong.ai/vg/>
+
+        # Virtual Graph X is an alias for Real Graphs A & B
+        <http://example/graph/X>
+            vg:isAliasFor
+                 <http://example/graph/A> ,
+                 <http://example/graph/B> ;
+        .
+    """ ;
+.
