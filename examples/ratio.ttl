@@ -1,1 +1,43 @@
-# to come
+# Estimations of a mineral occurrence - amount of gold in the earth's crust.
+
+# In this example, three polygons of a series of drillhole are dug in a grid and rock samples are taken and then analysed for the ammount of gold they contain. Here they yield either
+
+# The RDFS ContainerMembershipProperty predicates rdfs:_1, rdf:_2 etc are used to place the geometries in an order, thus the Level of Measurement in this GeometryCollection is (at least) Ordinal. Since no other numeric properties for geometry ordering are given, Interval and Ratio Levels are not applicable, thus the Level of Measurement is indeed Ordinal.
+
+# Note that the SUFFER predicate typeOfMeasurement could have been used to indicate the Ordinal Level of Measurement.
+
+# The order from _1 -> _3 instructs rendering to colour the geometry _1 the highest/most visible and _3 the lowest/least visible. Crisp boundaries for the geometries must be used.
+
+
+PREFIX : <https://w3id.org/suffer/>
+PREFIX ex: <http://example.com/>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <https://schema.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+ex:south-east-queensland
+    a geo:Feature ;
+    schema:name "South East Queensland" ;
+    :hasGeometries [
+        a geo:GeometryCollection ;
+        rdfs:_1 [
+            a geo:Geometry ;
+            sdo:name "SEQ - Premier" ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+            schema:citation "SEQ as inferred from a speech given by the Premier of Qld to the National Press Club, 3rd June, 1998" ;
+        ] ;
+        rdfs:_2 [
+            a geo:Geometry ;
+            sdo:name "SEQ - ABC news" ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+            schema:citation "SEQ area used by the Australian Broadcasting Corporation" ;
+        ] ;
+        rdfs:_3 [
+            a geo:Geometry ;
+            sdo:name "SEQ - Charleville mayor" ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+            schema:citation "Pers Coms, Mayor of Charleville, 2024" ;
+        ] ;
+    ] ;
+.

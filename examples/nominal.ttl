@@ -1,1 +1,49 @@
-# to come
+# A traditional homeland area for an imaginative Australian Indigenous people with the extent of the homeland attributed to multiple, non-commensurate, lines of evidence.
+
+# The evidence in this example are articles and projects indicated using citation.
+
+# Since no SUFFER predicates indicating the Type of Measurement are given, the most basic form - Nominal - is assumed.
+
+# Note that the SUFFER predicate typeOfMeasurement could have been used to indicate the Nominal Level of Measurement.
+
+# Since no ordering is given for the geometries, rendering should present them equally: no geometry visually favoured over another. The same colour and opacity should be used for all geometries' styling. Crisp boundaries for the geometries must be used since no direction for opacity gradients can be inferred.
+
+
+PREFIX : <https://w3id.org/suffer/>
+PREFIX ex: <http://example.com/>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <https://schema.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+ex:indigenous-homeland-x
+    a geo:Feature ;
+    schema:name "Indigenous Homeland X" ;
+    :hasGeometries [
+        a geo:GeometryCollection ;
+        rdfs:member [
+            a geo:Geometry ;
+            sdo:name "Boundary A - Smith & Jones 1995" ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+            schema:citation "Smith & Jones \\"Place Name Linguistics for northern New South Wales\\". Aust J Anthropol, 27 (4)" ;
+        ] ,
+        [
+            a geo:Geometry ;
+            sdo:name "Boundary B - AAITSIS 2023" ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+            schema:citation "Determined by archaeological evidence, according to AIATSIS 2023" ;
+        ] ,
+        [
+            a geo:Geometry ;
+            sdo:name "Boundary C - 1983 Police Survey" ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+            schema:citation [
+                a schema:Report ;
+                schema:archivedAt "http://some-place-online.com"^^xsd:anyURI ;
+                schema:datePublished "1893"^^xsd:gYear ;
+                schema:name "NSW Police Survey of X Tribe" ;
+                schema:publisher "Colony of NSW Police Force Archive" ;
+            ] ;
+        ] ;
+    ] ;
+.

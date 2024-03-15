@@ -1,0 +1,31 @@
+= Spatial Uncertainty For Feature Elements Representation (SUFFER) Model
+:toc: left
+:table-stripes: even
+:sectids:
+:sectanchors:
+:sectnums:
+
+:sectnums!:
+
+[[fig-overview1]]
+.An informal model overview diagram showing the major elements of this model
+image::img/overview.svg[]
+
+
+:sectnums:
+
+include::01-metadata.adoc[]
+
+include::02-preamble.adoc[]
+
+include::03-introduction.adoc[]
+
+include::04-model.adoc[]
+
+include::05-supporting-vocabularies.adoc[]
+
+:sectnums!:
+
+// include::50-annex-a-requirements.adoc[]
+
+include::99-bibliography.adoc[]

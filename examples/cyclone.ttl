@@ -1,0 +1,51 @@
+# Time sequence of the location of a cyclone.
+
+# This example shows an alternate use of associating a Feature with a GeometryCollection: to order the Geometries in the collection.
+
+# Ordering here is given by the RDFS predicates _1, _2 etc., which set an order beyond that which can be inferred by other properties of the geometries, for example the hasTime predicate. Here the same time is present for multiple hasTime values so the geometries do not have a simple ordering based on that predicate.
+
+
+PREFIX : <https://w3id.org/suffer/>
+PREFIX ex: <http://example.com/>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <https://schema.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+ex:south-east-queensland
+    a geo:Feature ;
+    schema:name "Tropical Cyclone Nick" ;
+    :hasGeometries [
+        a geo:GeometryCollection ;
+        rdfs:_1 [
+            a geo:Geometry ;
+            time:hasTime [ time:inXSDDate "2003-11-07"^^xsd:dateTime ] ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+        ] ;
+        rdfs:_2 [
+            a geo:Geometry ;
+            time:hasTime [ time:inXSDDate "2003-11-07"^^xsd:dateTime ] ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+        ] ;
+        rdfs:_3 [
+            a geo:Geometry ;
+            time:hasTime [ time:inXSDDate "2003-11-07"^^xsd:dateTime ] ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+        ] ,
+        rdfs:_4 [
+            a geo:Geometry ;
+            time:hasTime [ time:inXSDDate "2003-11-08"^^xsd:dateTime ] ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+        ] ;
+        rdfs:_5 [
+            a geo:Geometry ;
+            time:hasTime [ time:inXSDDate "2003-11-09"^^xsd:dateTime ] ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+        ] ;
+        rdfs:_6 [
+            a geo:Geometry ;
+            time:hasTime [ time:inXSDDate "2003-11-09"^^xsd:dateTime ] ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+        ] ;
+    ] ;
+.

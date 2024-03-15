@@ -1,0 +1,251 @@
+== Model
+
+
+This model is composed of Web Ontology Language (OWL) <<OWL>> Classes and Properties. While some of the properties are restricted in their use to various classes, the Classes and Properties are actually defined individually and both are "first class model citizens", with global identity, that can be used in isolation as well as together. This is in contrast to Unified Modelling Language (UML) _Class Diagrams_ which treat most Properties as element of particular Classes.
+
+This model defines only three Classes and no Properties but reuses many Classes and Properties from other models. Where it does, basic details of, a reference to that Class or Properties' definition via `rdfs:isDefinedBy`, and a scope note about using it in this model are given.
+
+[[fig-overview]]
+.Overview of this model showing major elements
+image::img/overview.svg[]
+
+
+[[Classes]]
+=== Classes
+
+==== Classes defined by this model
+
+** ??
+
+[[Address]]
+===== Address
+
+[cols="2,6"]
+|===
+| Property | Value
+
+| IRI | `addr:Address`
+| Preferred Label | Address
+| Definition | The Address class represents structured information that allows unambiguous identified of an object for the purposes of identification and location
+| Is Defined By | This model
+| Subclass Of | <<CompoundName>>
+| Provenance | Derived from <<ISO19160-1>>'s `Address` class
+| Expected Properties | <<isNameFor>>, <<hasPart>>, <<hasGeocode>>, <<hasLifecycleStage>>,
+| Example 
+a| [source,turtle]
+----
+PREFIX addr: <https://linked.data.gov.au/def/addr/>
+PREFIX apt: <http://linked.data.gov.au/def/address-part-types/>
+PREFIX cn: <https://linked.data.gov.au/def/cn/>
+PREFIX ex: <http://example.com/>
+PREFIX ex-geom: <http://example.com/geometry/>
+PREFIX ex-parcel: <http://example.com/parcel/>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX ls: <https://linked.data.gov.au/def/lifecycle/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX sdo: <https://schema.org/>
+
+<http://example.com/oxford>
+    a addr:Address ;
+    sdo:hasPart [
+        sdo:additionalType apt:numberFirst ;
+        rdf:value 20
+    ] ,
+    [
+        sdo:additionalType apt:road ;
+        rdf:value <https://linked.data.gov.au/dataset/qldaddr/streetLocality/QLD140492> ; # "Oxford Place"
+    ] ,
+    [
+        sdo:additionalType apt:locality ;
+        rdf:value <https://linked.data.gov.au/dataset/qldaddr/locality/loc38f189794e03> ;  # "Shorncliffe"
+    ] ,
+    [
+        sdo:additionalType apt:administrativeArea ;
+        rdf:value <https://linked.data.gov.au/dataset/asgsed3/STE/3> ; # "Queensland"
+    ] ,
+    [
+        sdo:additionalType apt:postcode ;
+        rdf:value 4017
+    ] ;
+    addr:hasGeocode [
+        geo:hasGeometry [
+            sdo:additionalType <https://linked.data.gov.au/def/geocode-types/property-centroid> ;
+            geo:hasGeometry ex-geom:x ;
+        ] ;
+    ] ;
+    cn:isNameFor ex-parcel:161162441 ;
+    ls:hasLifecycleStage [
+        sdo:additionalType ex:Unofficial ;
+    ] ;
+.
+----
+|===
+
+==== Existing classes reused by this model
+
+* <<Feature>>
+* <<Geometry>>
+* <<GeometryCollection, Geometry Collection>>
+* <<Concept>>
+* <<Resource>>
+
+[[Feature]]
+===== Feature
+
+[cols="2,6"]
+|===
+| Property | Value
+
+| IRI | `geo:Feature`
+| Preferred Label | Feature
+| Definition | A discrete spatial phenomenon in a universe of discourse
+| Is Defined By | <<GEO>>
+| Scope Note | Used as the basis for the Road Object class
+|===
+
+[[Geometry]]
+===== Geometry
+
+[cols="2,6"]
+|===
+| Property | Value
+
+| IRI | `geo:Geometry`
+| Preferred Label | Geometry
+| Definition | A coherent set of direct positions in space. The positions are held within a Spatial Reference System (SRS).
+| Is Defined By | <<GEO>>
+| Scope Note | Used to give spatial representation information for a Road Object
+|===
+
+[[GeometryCollection]]
+===== GeometryCollection
+
+[cols="2,6"]
+|===
+| Property | Value
+
+| IRI | `geo:GeometryCollection`
+| Preferred Label | Geometry Collection
+| Definition | A collection of individual Geometries
+| Is Defined By | <<GEO>>
+|===
+
+[[Concept]]
+===== Concept
+
+[cols="2,6"]
+|===
+| Property | Value
+
+| IRI | `skos:Concept`
+| Preferred Label | Concept
+| Definition | An idea or notion; a unit of thought
+| Is Defined By | <<SKOS>>
+| Scope Note | Used to indicate a value that should come from a vocabulary (modelled as a `skos:ConceptScheme)
+|===
+
+[[Resource]]
+===== Resource
+
+[cols="2,6"]
+|===
+| Property | Value
+
+| IRI | `rdfs:Resource`
+| Preferred Label | Resource
+| Definition | The class resource, everything
+| Is Defined By | <<RDFS>>
+| Scope Note | Used to indicate any kind of RDF value - a literal, IRI or Blank Node
+|===
+
+
+[[Properties]]
+=== Properties
+
+==== Properties defined by this model
+
+* <<hasGeometries, has geometries>>
+* <<levelOfMeasurement, level of measurement>>
+
+[[hasGeometries]]
+===== hasGeometries
+
+[cols="2,6"]
+|===
+| Property | Value
+
+| IRI | `:hasGeometries`
+| Preferred Label | has geometries
+| Definition | Indicates a collection of spatial representations for a given Feature
+| Is Defined By | This model
+| Domain | <<Feature>>
+| Range | <<GeometryCollection>>
+|===
+
+[[levelOfMeasurement]]
+===== levelOfMeasurement
+
+[cols="2,6"]
+|===
+| Property | Value
+
+| IRI | `:levelOfMeasurement`
+| Preferred Label | level of measurement
+| Definition | Indicates the level of measurement - nature of information within the values assigned to variables - within members of a given collection
+| Is Defined By | This model
+| Domain | <<GeometryCollection>>
+| Range | <<Concept>>
+|===
+
+==== Existing properties reused by this model
+
+* <<hasGeometry, has geometry>>
+* <<member>>
+* <<_1>>
+
+[[hasGeometry]]
+===== hasGeometry
+
+[cols="2,6"]
+|===
+| Property | Value
+
+| IRI | `geo:hasGeometry`
+| Preferred Label | has geometry
+| Definition | A spatial representation for a given Feature
+| Is Defined By | <<GEO>>
+| Domain | <<Feature>>
+| Range | <<Geometry>>
+| Scope Note | Used to indicate the Geometry of a Feature, such as a Road Object
+|===
+
+[[member]]
+===== member
+
+[cols="2,6"]
+|===
+| Property | Value
+
+| IRI | `rdfs:member`
+| Preferred Label | member
+| Definition | A member of the subject resource
+| Is Defined By | <<GEO>>
+| Domain | <<Resource>>
+| Range | <<Resource>>
+| Scope Note | In the SUFFER Model, use this predicate to indicate the member <<Geometry>> instances within a <<GeometryCollection>>
+|===
+
+[[_1]]
+===== _1
+
+[cols="2,6"]
+|===
+| Property | Value
+
+| IRI | `rdfs:_1`
+| Preferred Label | firs member
+| Definition | An instance of the https://www.w3.org/TR/rdf12-schema/#ch_containermembershipproperty[rdfs:ContainerMembershipProperty] indicating the first member in a collection
+| Is Defined By | <<RDFS>>
+| Subproperty Of | <<member>>
+| Scope Note | In the SUFFER Model, use this predicate to indicate the first member <<Geometry>> instance within an ordered <<GeometryCollection>>
+|===

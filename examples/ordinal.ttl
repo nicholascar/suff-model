@@ -1,1 +1,40 @@
-# to come
+# Approximations of the informal area of "South East Queensland" using non-commensurate, but orderable, lines of evidence.
+
+# The RDFS ContainerMembershipProperty predicates rdfs:_1, rdf:_2 etc are used to place the geometries in an order, thus the Level of Measurement in this GeometryCollection is (at least) Ordinal. Since no other numeric properties for geometry ordering are given, Interval and Ratio Levels are not applicable, thus the Level of Measurement is indeed Ordinal.
+
+# Note that the SUFFER predicate typeOfMeasurement could have been used to indicate the Ordinal Level of Measurement.
+
+# No specific opacity values for the geometries are given so their opacity must be inferred from their order. The order from _1 -> _3 instructs _1 to have the highest opacity and _3 the lowest. To achieve this, the same colour and opacity, with opacity < 1.0, and crisp boundaries may be used for each geometry, thus causing geometry intersections to be more visible than single geometry covered areas. Alternatively, an opacity gradient may be used with the point of 1.0 opacity being the centroid of the _1 geometry and the line of 0.0 opacity being a boundary outside the last geometry (_3) the same distance from _3 as _3 is from _2 at any point. For this gradient mode, the opacity at any geometry's boundary i ordered 1, 2, 3 in a set of N geometries must be (1.0/(N+1))*(N-i), so at boundary _1 it is (1.0/4)*3=0.75, at _3 is is (1.0/4)*1 = 0.25
+
+PREFIX : <https://w3id.org/suffer/>
+PREFIX ex: <http://example.com/>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <https://schema.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+ex:south-east-queensland
+    a geo:Feature ;
+    schema:name "South East Queensland" ;
+    :hasGeometries [
+        a geo:GeometryCollection ;
+        rdfs:_1 [
+            a geo:Geometry ;
+            sdo:name "SEQ - Premier" ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+            schema:citation "SEQ as inferred from a speech given by the Premier of Qld to the National Press Club, 3rd June, 1998" ;
+        ] ;
+        rdfs:_2 [
+            a geo:Geometry ;
+            sdo:name "SEQ - ABC news" ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+            schema:citation "SEQ area used by the Australian Broadcasting Corporation" ;
+        ] ;
+        rdfs:_3 [
+            a geo:Geometry ;
+            sdo:name "SEQ - Charleville mayor" ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+            schema:citation "Pers Coms, Mayor of Charleville, 2024" ;
+        ] ;
+    ] ;
+.

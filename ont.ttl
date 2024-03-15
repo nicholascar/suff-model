@@ -17,7 +17,7 @@ PREFIX vann: <http://purl.org/vocab/vann/>
     a
         owl:Ontology ,
         prof:Profile ;
-    dcterms:provenance "This profile of GeoSPARQL was made to satisfy various projects' needs in 2023 - 2024"@en ;
+    skos:historyNote "This profile of GeoSPARQL was made to satisfy various projects' needs in 2023 - 2024"@en ;
     owl:versionIRI <http://w3id.org/suffer/0.0.1> ;
     owl:versionInfo "0.0.1" ;
     prof:hasResource
@@ -51,8 +51,8 @@ PREFIX vann: <http://purl.org/vocab/vann/>
     schema:dateIssued "2024-03-11"^^xsd:date ;
     schema:dateModified "2024-03-11"^^xsd:date ;
     schema:description "An ontology that builds on elements of GeoSPARQL 1.1 to cater for spatial fuzziness and uncertainty and which allows for probabilistic topological functions"@en ;
-    schema:license "https://opensource.org/license/BSD-3-clause"^^xsd:anyURI ;
-    schema:name "SUFFER Ontology"@en ;
+    schema:license <https://rdflicense.linkeddata.es/rdflicense/BSD3.0> ;
+    schema:name "Spatial Uncertainty For Feature Elements Representation (SUFFER) Model"@en ;
     schema:publisher <https://orcid.org/0000-0002-8742-7730> ;
     vann:preferredNamespacePrefix "suffer" ;
 .

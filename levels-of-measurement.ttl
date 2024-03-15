@@ -1,0 +1,75 @@
+PREFIX : <https://linked.data.gov.au/def/levels-of-measurement/>
+PREFIX cs: <https://linked.data.gov.au/def/levels-of-measurement>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <https://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+:interval
+    a skos:Concept ;
+    skos:definition "The interval type allows for defining the degree of difference between measurements, but not the ratio between measurements"@en ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Interval"@en ;
+    skos:topConceptOf cs: ;
+    schema:citation "https://en.wikipedia.org/wiki/Level_of_measurement"^^xsd:anyURI ;
+.
+
+:nominal
+    a skos:Concept ;
+    skos:definition "The nominal level differentiates between items or subjects based only on their names or (meta-)categories and other qualitative classifications they belong to; thus dichotomous data involves the construction of classifications as well as the classification of items"@en ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Nominal"@en ;
+    skos:topConceptOf cs: ;
+    schema:citation "https://en.wikipedia.org/wiki/Level_of_measurement"^^xsd:anyURI ;
+.
+
+:ordinal
+    a skos:Concept ;
+    skos:definition "The ordinal level allows for rank order (1st, 2nd, 3rd, etc.) by which data can be sorted but still does not allow for a relative degree of difference between them"@en ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Ordinal"@en ;
+    skos:topConceptOf cs: ;
+    schema:citation "https://en.wikipedia.org/wiki/Level_of_measurement"^^xsd:anyURI ;
+.
+
+:ratio
+    a skos:Concept ;
+    skos:definition "The ratio type takes its name from the fact that measurement is the estimation of the ratio between a magnitude of a continuous quantity and a unit of measurement of the same kind"@en ;
+    skos:inScheme cs: ;
+    skos:prefLabel "Ratio"@en ;
+    skos:topConceptOf cs: ;
+    schema:citation "https://en.wikipedia.org/wiki/Level_of_measurement"^^xsd:anyURI ;
+.
+
+<https://orcid.org/0000-0002-8742-7730>
+    a schema:Person ;
+    schema:affiliation <https://linked.data.gov.au/org/anu> ;
+    schema:email "nicholas.car@anu.edu.au"^^xsd:anyURI ;
+    schema:name "Nicholas J. Car" ;
+    schema:url "https://researchers.anu.edu.au/researchers/car-n"^^xsd:anyURI ;
+.
+
+<https://linked.data.gov.au/org/anu>
+    a schema:Organization ;
+    schema:name "Australian National University" ;
+    schema:url "https://linked.data.gov.au/org/anu"^^xsd:anyURI ;
+.
+
+cs:
+    a skos:ConceptScheme ;
+    owl:versionIRI :1.0 ;
+    owl:versionInfo "1.0" ;
+    skos:definition "This vocabulary defines level of measurement that are classifications that describes the nature of information within the values assigned to variables"@en ;
+    skos:hasTopConcept
+        :interval ,
+        :nominal ,
+        :ordinal ,
+        :ratio ;
+    skos:historyNote "This vocabulary was created for use within the SUFFER Ontology (https://w3id.org/suffer/) to allow allow clients of semantic spatial data to understand some elements of the display of geometries within a geometry collection." ;
+    skos:prefLabel "Levels of Measurement"@en ;
+    skos:usageNote "Despite the spatial data motivation for the creation of this vocabulary, it is generic in its representation of Levels of Measurement information and can be used for many purposes other than spatial information" ;
+    schema:creator <https://orcid.org/0000-0002-8742-7730> ;
+    schema:dateCreated "2024-03-15"^^xsd:date ;
+    schema:dateModified "2024-03-15"^^xsd:date ;
+    schema:publisher <https://linked.data.gov.au/org/anu> ;
+.

@@ -1,45 +1,53 @@
+# Extent of a mineral occurrence in a rock body.
+
+# Since the density measurements are on a scale of The RDFS ContainerMembershipProperty predicates rdfs:_1, rdf:_2 etc are used to place the geometries in an order, thus the Level of Measurement in this GeometryCollection is (at least) Ordinal. Since no other numeric properties for geometry ordering are given, Interval and Ratio Levels are not applicable, thus the Level of Measurement is indeed Ordinal.
+
+# Note that the SUFFER predicate typeOfMeasurement could have been used to indicate the Ordinal Level of Measurement.
+
+# The order from _1 -> _3 instructs rendering to colour the geometry _1 the highest/most visible and _3 the lowest/least visible. Crisp boundaries for the geometries must be used.
+
+
 PREFIX : <https://w3id.org/suffer/>
+PREFIX ex: <http://example.com/>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <https://schema.org/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-#
-#   Classes
-#
-
-vg:VirtualGraph
-    a owl:Class ;
-    rdfs:isDefinedBy <https://pid.kurrawong.ai/vg> ;
-    skos:definition """A Graph that is an alias for other Graphs and may not contain triples"""@en ;
-    skos:prefLabel "Virtual Graph"@en ;
-    skos:example """
-        PREFIX vg: <https://pid.kurrawong.ai/vg/>
-        PREFIX sdo: <https://schema.org>
-
-        <http://example/graph/X>
-            a vg:VirtualGraph
-            sdo:name "Virtual Graph X" ;
-        .
-    """ ;
-.
-
-
-#
-#   Predicates
-#
-
-vg:isAliasFor
-    a owl:ObjectProperty ;
-    rdfs:isDefinedBy <https://pid.kurrawong.ai/vg> ;
-    rdfs:domain vg:VirtualGraph ;
-    rdfs:range vg:Graph ;
-    skos:definition """A Virtual Graph is an alias for a Graph"""@en ;
-    skos:prefLabel "is alias for"@en ;
-    skos:example """
-        PREFIX vg: <https://pid.kurrawong.ai/vg/>
-
-        # Virtual Graph X is an alias for Real Graphs A & B
-        <http://example/graph/X>
-            vg:isAliasFor
-                 <http://example/graph/A> ,
-                 <http://example/graph/B> ;
-        .
-    """ ;
+ex:south-east-queensland
+    a geo:Feature ;
+    schema:name "Tropical Cyclone Nick" ;
+    :hasGeometries [
+        a geo:GeometryCollection ;
+        rdfs:_1 [
+            a geo:Geometry ;
+            sosa:phenomenonTime "2003-11-05"^^xsd:dateTime ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+        ] ;
+        rdfs:_2 [
+            a geo:Geometry ;
+            sosa:phenomenonTime "2003-11-06"^^xsd:dateTime ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+        ] ;
+        rdfs:_3 [
+            a geo:Geometry ;
+            sosa:phenomenonTime "2003-11-07"^^xsd:dateTime ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+        ] ,
+        rdfs:_4 [
+            a geo:Geometry ;
+            sosa:phenomenonTime "2003-11-08"^^xsd:dateTime ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+        ] ;
+        rdfs:_5 [
+            a geo:Geometry ;
+            sosa:phenomenonTime "2003-11-09"^^xsd:dateTime ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+        ] ;
+        rdfs:_6 [
+            a geo:Geometry ;
+            sosa:phenomenonTime "2003-11-20"^^xsd:dateTime ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+        ] ;
+    ] ;
 .
