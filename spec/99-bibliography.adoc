@@ -20,6 +20,8 @@
 
 [[ISO19156]] ISO19156:: International Organization for Standardization, _ISO 19156: Geographic information — Observations and measurements_ (2011)
 
+[[KIRCH]] KIRCH:: Kirch, W. (eds), _Level of Measurement_ (2008). In: Encyclopedia of Public Health. Springer, Dordrecht. https://doi.org/10.1007/978-1-4020-5614-7_1971
+
 [[OGC-06-103r4]] OGC-06-103r4:: Open Geospatial Consortium: OGC 06-103r4 OpenGIS® Implementation Standard for Geographic information — Simple feature access — Part 1: Common architecture. http://www.opengis.net/doc/is/sfa/1.2.1
 
 [[OWL]] OWL:: World Wide Web Consortium, _OWL 2 Web Ontology Language Document Overview (Second Edition)_, W3C Recommendation (11 December 2012). https://www.w3.org/TR/owl2-overview/

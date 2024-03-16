@@ -20,9 +20,15 @@ include::02-preamble.adoc[]
 
 include::03-introduction.adoc[]
 
-include::04-model.adoc[]
+include::04-principles.adoc[]
 
-include::05-supporting-vocabularies.adoc[]
+include::05-elements.adoc[]
+
+include::06-vocabularies.adoc[]
+
+include::07-rules.adoc[]
+
+include::08-topo-functions.adoc[]
 
 :sectnums!:
 

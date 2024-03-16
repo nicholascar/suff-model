@@ -1,7 +1,8 @@
-== Model
+== Elements
 
+This section defines the data elements of this model.
 
-This model is composed of Web Ontology Language (OWL) <<OWL>> Classes and Properties. While some of the properties are restricted in their use to various classes, the Classes and Properties are actually defined individually and both are "first class model citizens", with global identity, that can be used in isolation as well as together. This is in contrast to Unified Modelling Language (UML) _Class Diagrams_ which treat most Properties as element of particular Classes.
+This model is composed of Web Ontology Language (OWL) <<OWL>> Classes and Properties. While some properties are restricted in their use to various classes, the Classes and Properties are actually defined individually and both are "first class model citizens", with global identity, that can be used in isolation as well as together. This is in contrast to Unified Modelling Language (UML) _Class Diagrams_ which treat most Properties as element of particular Classes.
 
 This model defines only three Classes and no Properties but reuses many Classes and Properties from other models. Where it does, basic details of, a reference to that Class or Properties' definition via `rdfs:isDefinedBy`, and a scope note about using it in this model are given.
 
