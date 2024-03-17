@@ -1,0 +1,1854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.16">
+<title>Spatial Uncertainty for Features &amp; Functions (SUFF) Model</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
+ul.square{list-style-type:square}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;-webkit-tap-highlight-color:transparent}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos{border-right:1px solid;opacity:.35;padding-right:.5em}
+pre.pygments .lineno{border-right:1px solid;opacity:.35;display:inline-block;margin-right:.75em}
+pre.pygments .lineno::before{content:"";margin-right:-.125em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all tr,table.stripes-odd tr:nth-of-type(odd),table.stripes-even tr:nth-of-type(even),table.stripes-hover tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+ol>li p,ul>li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+.gist .file-data>table{border:0;background:#fff;width:100%;margin-bottom:0}
+.gist .file-data>table td.line-data{width:99%}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<h1>Spatial Uncertainty for Features &amp; Functions (SUFF) Model</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_metadata">1. Metadata</a></li>
+<li><a href="#_preamble">2. Preamble</a>
+<ul class="sectlevel2">
+<li><a href="#_abstract">2.1. Abstract</a></li>
+<li><a href="#_namespaces">2.2. Namespaces</a></li>
+<li><a href="#_conformance">2.3. Conformance</a></li>
+</ul>
+</li>
+<li><a href="#_introduction">3. Introduction</a>
+<ul class="sectlevel2">
+<li><a href="#_motivation">3.1. Motivation</a></li>
+<li><a href="#_structure">3.2. Structure</a></li>
+</ul>
+</li>
+<li><a href="#_principles">4. Principles</a>
+<ul class="sectlevel2">
+<li><a href="#_uncertainty_in_position_only">4.1. Uncertainty in position only</a></li>
+<li><a href="#_uncertainty_not_in_resolution_or_accuracy">4.2. Uncertainty not in resolution or accuracy</a></li>
+<li><a href="#_deterministic_interpretation">4.3. Deterministic interpretation</a></li>
+<li><a href="#_xxx">4.4. XXX</a></li>
+<li><a href="#_feature_display">4.5. Feature display</a></li>
+<li><a href="#_probabilistic_topological_functions">4.6. Probabilistic Topological Functions</a></li>
+<li><a href="#_model_resources">4.7. Model resources</a></li>
+</ul>
+</li>
+<li><a href="#_elements">5. Elements</a>
+<ul class="sectlevel2">
+<li><a href="#Classes">5.1. Classes</a></li>
+<li><a href="#Predicates">5.2. Predicates</a></li>
+<li><a href="#Vocabularies">5.3. Vocabularies</a></li>
+</ul>
+</li>
+<li><a href="#_rules">6. Rules</a></li>
+<li><a href="#_topological_functions">7. Topological Functions</a></li>
+<li><a href="#_bibliography">Bibliography</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div id="fig-overview1" class="imageblock">
+<div class="content">
+<img src="img/overview.svg" alt="overview">
+</div>
+<div class="title">Figure 1. An informal model overview diagram showing the major elements of this model</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_metadata"><a class="anchor" href="#_metadata"></a>1. Metadata</h2>
+<div class="sectionbody">
+<table class="tableblock frame-none grid-none stripes-even" style="width: 75%;">
+<colgroup>
+<col style="width: 28.5714%;">
+<col style="width: 71.4286%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>IRI</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://w3id.org/suff/spec" class="bare">https://w3id.org/suff/spec</a></code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><a href="https://schema.org/name">Name</a></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spatial Uncertainty for Features &amp; Functions (SUFF) Model</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><a href="https://schema.org/description">Description</a></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A Semantic Web model that builds on elements of the GeoSPARQL 1.1 ontology to cater for the representation of spatial uncertainty allowing for deterministic fuzzy visualisations and probabilistic topological functions</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><a href="https://schema.org/dateCreated">Date Created</a></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2024-03-15</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><a href="https://schema.org/dateModified">Modified</a></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2024-03-17</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><a href="https://schema.org/dateIssued">Date Issued</a></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2024-03-15</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><a href="https://schema.org/creator">Creator</a></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://orcid.org/0000-0002-8742-7730">Nicholas J. Car</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><a href="https://schema.org/publisher">Publisher</a></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://linked.data.gov.au/org/anu">Australian National University</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><a href="https://www.w3.org/2009/08/skos-reference/skos.html#historyNote">History Note</a></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This profile of GeoSPARQL was made to satisfy various projects' needs in 2023 - 2024</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><a href="http://purl.org/linked-data/registry#status">Status</a></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://linked.data.gov.au/def/reg-statuses/experimental">Experimental</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><a href="https://schema.org/version">Version</a></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0.0.1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><a href="https://schema.org/codeRepository">Code Repository</a></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/nicholascar/suff-model" class="bare">https://github.com/nicholascar/suff-model</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><a href="https://schema.org/license">License</a></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://opensource.org/license/BSD-3-clause">BSD 3-Clause License</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><a href="https://schema.org/copyrightNotice">Copyright Notice</a></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&copy; Nicholas J. Car, 2024</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Machine-readable form (RDF)</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://w3id.org/suff/ont.ttl" class="bare">https://w3id.org/suff/ont.ttl</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_preamble"><a class="anchor" href="#_preamble"></a>2. Preamble</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_abstract"><a class="anchor" href="#_abstract"></a>2.1. Abstract</h3>
+<div class="paragraph">
+<p>This is a Semantic Web model that builds on elements of the GeoSPARQL 1.1 ontology to cater for the representation of spatial uncertainty allowing for deterministic fuzzy visualisations and probabilistic topological functions.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_namespaces"><a class="anchor" href="#_namespaces"></a>2.2. Namespaces</h3>
+<div class="paragraph">
+<p>This model uses the <a href="#GEO">GeoSPARQL 1.1</a> namespace and those of several others from well-known and mostly standardised ontologies as well as its own - <code>suff</code>. All namespaces used, and prefixes for them, are listed in the table below.</p>
+</div>
+<table class="tableblock frame-none grid-none stripes-even stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 40%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Prefix</th>
+<th class="tableblock halign-left valign-top">Namespace</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>:</strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong><a href="http://w3id.org/suff/" class="bare">http://w3id.org/suff/</a></strong></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>This model</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>lom</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://linked.data.gov.au/def/levels-of-measurement/" class="bare">https://linked.data.gov.au/def/levels-of-measurement/</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Levels of Measurement vocabulary namespace</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ex</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://example.com/" class="bare">http://example.com/</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Non-resolving namespace for examples</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>geo</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://www.opengis.net/ont/geosparql#" class="bare">http://www.opengis.net/ont/geosparql#</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GeoSPARQL Ontology Namespace</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>geof</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://www.opengis.net/def/function/geosparql/" class="bare">http://www.opengis.net/def/function/geosparql/</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GeoSPARQL Functions Namespace</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>owl</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://www.w3.org/2002/07/owl#" class="bare">http://www.w3.org/2002/07/owl#</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Web Ontology Language ontology</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rdfs</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://www.w3.org/2000/01/rdf-schema#" class="bare">http://www.w3.org/2000/01/rdf-schema#</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RDF Schema ontology</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sosa</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://www.w3.org/ns/sosa/" class="bare">http://www.w3.org/ns/sosa/</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sensor, Observation, Sample, and Actuator ontology</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>schema</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://schema.org/" class="bare">https://schema.org/</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">schema.org model</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>skos</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://www.w3.org/2004/02/skos/core#" class="bare">http://www.w3.org/2004/02/skos/core#</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Simple Knowledge Organization System (SKOS) ontology</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>time</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://www.w3.org/2006/time#" class="bare">http://www.w3.org/2006/time#</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time Ontology in OWL</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>void</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://rdfs.org/ns/void#" class="bare">http://rdfs.org/ns/void#</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vocabulary of Interlinked Data (VoID) ontology</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>xsd</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://www.w3.org/2001/XMLSchema#" class="bare">http://www.w3.org/2001/XMLSchema#</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XML Schema Definitions ontology</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_conformance"><a class="anchor" href="#_conformance"></a>2.3. Conformance</h3>
+<div class="paragraph">
+<p>This model&#8217;s specification conforms to the <a href="https://w3id.org/profile/ontpub">OntPub Profile</a> which is a standard for ontology publication that mandates certain structural and metadata properties for the model as a whole and model elements.</p>
+</div>
+<div class="sect3">
+<h4 id="_figures"><a class="anchor" href="#_figures"></a>2.3.1. Figures</h4>
+<div class="paragraph">
+<p>Figures used in this document use the following key:</p>
+</div>
+<div id="fig-figure-key" class="imageblock">
+<div class="content">
+<img src="img/key.svg" alt="key">
+</div>
+<div class="title">Figure 2. Key of elements used in this Model&#8217;s figures</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example_data"><a class="anchor" href="#_example_data"></a>2.3.2. Example Data</h4>
+<div class="paragraph">
+<p>Example data used in this document, for instance in model element "Example" values, are <a href="#RDF">RDF</a> data presented in the <a href="#TTL">TTL</a> syntax.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_introduction"><a class="anchor" href="#_introduction"></a>3. Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This model defines ways of arranging models elements from <a href="#GEO">GeoSPARQL</a>, other common <a href="https://en.wikipedia.org/wiki/Semantic_Web">Semantic Web</a> models such as <a href="#SDO">schema.org</a>, and some of its own elements to represent uncertainty in the position of geospatial features. By representing uncertainty in the data, this model removes possible ambiguity in the presentation of features with positional uncertainty and allows for their use with topological functions.</p>
+</div>
+<div class="paragraph">
+<p>The figure below and code listing that follow it give graphical and data views of simple example data created according to this model that represent a feature with spatial uncertainty.</p>
+</div>
+<div id="fig-ex1" class="imageblock text-center">
+<div class="content">
+<img src="img/ex1.svg" alt="ex1" width="50%">
+</div>
+<div class="title">Figure 3. A simple example of a geospatial feature with positional uncertainty - the location of an Indigenous people&#8217;s homeland area. The polygons A, B, C &amp; D give different estimates for the extent of the area with A being the most certain and D the least.</div>
+</div>
+<div class="listingblock">
+<div class="title">Listing 1: Example data for the figure above</div>
+<div class="content">
+<pre class="highlight"><code class="language-turtle" data-lang="turtle">PREFIX : &lt;https://w3id.org/suffer/&gt;
+PREFIX ex: &lt;http://example.com/&gt;
+PREFIX geo: &lt;http://www.opengis.net/ont/geosparql#&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX schema: &lt;https://schema.org/&gt;
+PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+
+ex:indigenous-homeland-x
+    a geo:Feature ;
+    schema:name "Indigenous Homeland X" ;
+    :hasGeometries [
+        a geo:GeometryCollection ;
+        rdfs:_1 [
+            a geo:Geometry ;
+            schema:name "A" ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+        ] ;
+        rdfs:_2 [
+            a geo:Geometry ;
+            schema:name "B" ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+        ] ;
+        rdfs:_3 [
+            a geo:Geometry ;
+            schema:name "C" ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+        ] ;
+        rdfs:_4 [
+            a geo:Geometry ;
+            schema:name "D" ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+        ] ;
+    ] ;
+.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following subsection in this Introduction describes the motivation for this work and the final subsection describes the structure of this specification.</p>
+</div>
+<div class="sect2">
+<h3 id="_motivation"><a class="anchor" href="#_motivation"></a>3.1. Motivation</h3>
+<div class="paragraph">
+<p>The immediate motivation for this model was the need, in multiple projects in 2022 - 2024, to represent the position of features with uncertainty.</p>
+</div>
+<div class="paragraph">
+<p>For example, to represent the traditional homeland areas of some Australian First Nations people which are known to not be sensibly represented with precise positions such as polygons with crisp boundaries due to the naturally fluid nature of First Nations peoples' land occupation patterns.</p>
+</div>
+<div class="paragraph">
+<p>Another example is mineral occurrences: mining companies sample the earth&#8217;s crust to determine where high concentrations of certain minerals are but they do so by sample - boreholes - and only build an incomplete picture of the occurrence area, i.e. one with uncertainty.</p>
+</div>
+<div class="paragraph">
+<p>A third example is endangered species locations: in Australia, it can be illegal to represent the precise location of endangered native species however representations of the species' location must be made and shared for environmental impact and other land use assessments. Obscured locations are currently provided for such species however the manufactured uncertainty is usually represented as a crisp polygon and additional notes on tolerances. Uncertainty built into the data would be better.</p>
+</div>
+<div class="paragraph">
+<p>The requirement to handle spatial uncertainty is thought to be widespread, for conversations about the potential for doing this hav attracted much interest.</p>
+</div>
+<div class="paragraph">
+<p>GeoSPARQL defines spatial <a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_class_geofeature"><code>Features</code></a> and <a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_geometry_class"><code>Geometry</code></a> classes that can be used, with elements from other well-known Semantic Web models, for data with uncertainty in all the above scenarios however, without dedicated methods for this, the representation and handling of it will differ in implementations.</p>
+</div>
+<div class="paragraph">
+<p>Where spatial uncertainty is handled in mainstream non-Semantic Web Graphical Information Systems (GIS), such as ESRI&#8217;s ArcGIS<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup>, it is handled superficially - in the display of the data, not encoded within the data. This leads to the issue of reproducibility where if data with uncertainty handled superficial is displayed elsewhere, the display may not be the same if the display software is different.</p>
+</div>
+<div class="paragraph">
+<p>This model encodes uncertainty in the data itself which, with the rules presented in the <a href="#_principles">Principles</a> section below, ensure that any software systems can implement the same display. Not only that: if uncertainty is encoded as per this model and the rules adhered to, topological calculations that result in probabilistic outcomes can be implemented against the data too.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_structure"><a class="anchor" href="#_structure"></a>3.2. Structure</h3>
+<div class="paragraph">
+<p>This model provides:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="#_principles">Principles</a></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>A series of principles describing the scope of what this model is intending to offer</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><a href="#_elements">Elements</a></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>New Semantic Web Classes and Predicated defined here and guided reuse of Classes and Predicates from other models to represent uncertainty</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><a href="#_rules">Rules</a></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>A series of rules that must be followed in the use of the elements of this model to ensure consistency in implementation</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><a href="#_topological_functions">Topological Functions</a></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Definitions for topological functions that can be performed on spatial data with uncertainty, as represented by the Elements of this model in accordance with this model&#8217;s Rules</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>and even a <a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_class_geogeometrycollection"><code>Geometry Collection</code></a> class which can be used to associate multiple geometries with a feature. This is the core of this model since multiple geometries for a feature can be used to convey location uncertainty in several ways - see the <a href="#_principles">Principles</a> below.</p>
+</div>
+<div class="paragraph">
+<p>GeoSPARQL 1.1 does not, however, provide all the elements needed for deterministic representations of feature location uncertainty, nor does GeoSPARQL 1.1 describe how to perform topological functions on features with uncertain location representation. This model defines conventions for GeoSPARQL 1.1 element use, and introduces several new model elements, for this purpose.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_principles"><a class="anchor" href="#_principles"></a>4. Principles</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section give a series of principles describing the scope of what this model is intending to offer.</p>
+</div>
+<div class="paragraph">
+<p>Some of these principles are conceptual and may not be computationally tested against data created in accordance with this model. Other principles are and lead on to rules in the <a href="#_rules">Rules</a> section.</p>
+</div>
+<div class="sect2">
+<h3 id="_uncertainty_in_position_only"><a class="anchor" href="#_uncertainty_in_position_only"></a>4.1. Uncertainty in position only</h3>
+<div class="paragraph">
+<p>This model only directly addresses uncertainty in the position of spatial features. It does not address uncertainty in the values of other feature properties. For example, if a map of average daily temperature for a region was modelled using GeoSPARQL 1.1 and this model&#8217;s elements, uncertainty in the measurement of the temperature values themselves would be out of scope.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">NOTE</dt>
+<dd>
+<p>Many other ontologies provide for the representation of measurement uncertain and simple models such as <a href="#SDO">schema.org</a> include properties such as <a href="https://schema.org/marginOfError">marginOfError</a> for this purpose.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uncertainty_not_in_resolution_or_accuracy"><a class="anchor" href="#_uncertainty_not_in_resolution_or_accuracy"></a>4.2. Uncertainty not in resolution or accuracy</h3>
+<div class="paragraph">
+<p>This model is not intended to represent spatial resolution or accuracy of positions (geometry elements): these are already representable with elements from <a href="#GEO">GeoSPARQL</a>, see:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_property_geohasspatialresolution">geo:hasSpatialResolution</a></p>
+</li>
+<li>
+<p><a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_property_geohasspatialaccuracy">geo:hasSpatialAccuracy</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This model aims to allow a user to represent specific values for uncertainty of position for a feature, rather than uncertainty which is unknown to them, perhaps due to the tolerance of instruments used to make position measurements.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deterministic_interpretation"><a class="anchor" href="#_deterministic_interpretation"></a>4.3. Deterministic interpretation</h3>
+<div class="paragraph">
+<p>The aim of this model is to allow a user to convey a defined amount of uncertainty in data and this amount is unambiguous: all users of the data will be able to derive the same amount.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_xxx"><a class="anchor" href="#_xxx"></a>4.4. XXX</h3>
+<div class="paragraph">
+<p>This model defines a number of rules that define the manner in which the spatial representation of features that contain uncertainty is to be interpreted.</p>
+</div>
+<div class="paragraph">
+<p>Uncertainty in position is conveyed by linking the feature not to one geometry but to multiple - a geometry collection. Each geometry in the collection conveys the certainty of the feature&#8217;s location at its boundary with the value either being given in the data or inferrable due to the geometry&#8217;s relative position in the collection.</p>
+</div>
+<div class="paragraph">
+<p>A series of rules, given in the following subsections, define how certainty at each geometry in a collection is to be obtained. These rules are based on the instructions on the level of measurement <a href="#KIRCH">KIRCH</a> relationship between the geometries in a geometry collection contained. The level of measurement will be one of <em>Nominal</em>, <em>Ordinal</em>, <em>Integer</em> or <em>Ratio</em>, as defined in the <a href="#_levels_of_measurement">Levels of Measurement</a> vocabulary in the <a href="#Supporting Vocabularies">[Supporting Vocabularies]</a> section of this model. It will either be indicated directly by the predicate <a href="#levelOfMeasurement">level of measurement</a> on a <a href="#GeometryCollection">Geometry Collection</a> instance, or it will be divined from other properties of the geometries. The default value is <em>Nominal</em>.</p>
+</div>
+<div class="sect3">
+<h4 id="_obtaining_the_level_of_measurement"><a class="anchor" href="#_obtaining_the_level_of_measurement"></a>4.4.1. Obtaining the Level of Measurement</h4>
+<div class="paragraph">
+<p>The following reasoning is to be used to determine the level of measurement of a Geometry Collection.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_rule_nominal_geometries"><a class="anchor" href="#_rule_nominal_geometries"></a>4.4.2. Rule: Nominal geometries</h4>
+
+</div>
+<div class="sect3">
+<h4 id="_rule_ordinal_geometries"><a class="anchor" href="#_rule_ordinal_geometries"></a>4.4.3. Rule: Ordinal geometries</h4>
+
+</div>
+<div class="sect3">
+<h4 id="_rule_interval_geometries"><a class="anchor" href="#_rule_interval_geometries"></a>4.4.4. Rule: Interval geometries</h4>
+
+</div>
+<div class="sect3">
+<h4 id="_rule_ratio_geometries"><a class="anchor" href="#_rule_ratio_geometries"></a>4.4.5. Rule: Ratio geometries</h4>
+
+</div>
+</div>
+<div class="sect2">
+<h3 id="_feature_display"><a class="anchor" href="#_feature_display"></a>4.5. Feature display</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_probabilistic_topological_functions"><a class="anchor" href="#_probabilistic_topological_functions"></a>4.6. Probabilistic Topological Functions</h3>
+<div class="paragraph">
+<div class="title">.If a <a href="#GeometryCollection">Geometry Collection</a> instance indicates its member <a href="#Geometry">Geometries</a> are related by the <a href="#levelOfMeasurement">level of measurement</a> to be a particular level of measurement, that value is to be used</div>
+<p>The <a href="#GEO">GeoSPARQL</a> standard provides both an ontology which defines spatial elements and predicates to indicate topological relationships between them and also function definitions that can be used to calculate those predicates.</p>
+</div>
+<div class="paragraph">
+<p>For example, the predicate <a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#sf_relations"><code>geo:sfWithin</code></a> indicated that its subject is spatially <em>within</em> its object where <em>within</em> is the Simple Features Within relation defined by <a href="#OGC-06-103r4">OGC-06-103r4</a>. The related GeoSPARQL function is <a href="http://www.opengis.net/def/function/geosparql/sfWithin"><code>geof:sfWithin</a> which defines the parameters and results from the function used to calculate the `geo:sfWithin</code> relation between two spatial objects.</p>
+</div>
+<div class="paragraph">
+<p>This model indicates how to calculate the <a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#sf_relations">Simple Features relations</a> between features whose position is uncertain and represented using elements from this model. The general method is described below and specific topological relation calculations follow.</p>
+</div>
+<div class="sect3">
+<h4 id="_general_method_for_probabilistic_topological_function_calculation"><a class="anchor" href="#_general_method_for_probabilistic_topological_function_calculation"></a>4.6.1. General method for probabilistic topological function calculation</h4>
+<div class="paragraph">
+<p>For a spatial feature <code>A</code> with certain position - a single geometry - and spatial feature <code>B</code> with uncertain geometry - as conveyed by this model - calculate a simple feature relation <code>R</code> as follows:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Determine the level of measurement <code>B_l</code> for the geometries of <code>B</code></p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>If <code>B_l</code> is <a href="#_levels_of_measurement">nominal</a>,</p>
+<div class="olist upperalpha">
+<ol class="upperalpha" type="A">
+<li>
+<p>For each geometry <code>BG_i</code> of <code>B</code>, calculate <code>A R BG_i</code> for each geometry</p>
+</li>
+<li>
+<p>If any <code>A R BG_i</code> is <code>true</code> then <code>A R B</code> is <code>true</code></p>
+</li>
+<li>
+<p>Else it is <code>false</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>If <code>B_l</code> is <a href="#_levels_of_measurement">ordinal</a>,</p>
+<div class="olist upperalpha">
+<ol class="upperalpha" type="A">
+<li>
+<p>For each geometry <code>BG_i</code> of <code>B</code>, calculate <code>A R BG_i</code> for each geometry in order</p>
+</li>
+<li>
+<p>Starting with the first geometry <code>BG_1</code> and proceeding to the last, <code>BG_N</code>, calculate <code>A R BG_i</code> for each geometry</p>
+<div class="olist upperroman">
+<ol class="upperroman" type="I">
+<li>
+<p>If</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>If <code>B_l</code> is <a href="#_levels_of_measurement">interval</a>,</p>
+</li>
+<li>
+<p>If <code>B_l</code> is <a href="#_levels_of_measurement">ratio</a>,</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<table id="table-order" class="tableblock frame-all grid-all stripes-even stretch">
+<caption class="title">Table 1. Order of geometry calculation per function</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">SF Relation</th>
+<th class="tableblock halign-left valign-top">Order</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family">equals</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family">disjoint</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lowest to highest</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family">intersects</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">highest to lowest</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family">touches</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lowest to highest</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family">within</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lowest to highest</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family">contains</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">highest to lowest</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family">overlaps</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">any</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family">crosses</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">any</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_model_resources"><a class="anchor" href="#_model_resources"></a>4.7. Model resources</h3>
+<div class="paragraph">
+<p>This document is this model&#8217;s "Specification" which is its authoritative, human-readable, definition document. This model also contains other resources with other roles:</p>
+</div>
+<table class="tableblock frame-all grid-all stripes-even" style="width: 75%;">
+<colgroup>
+<col style="width: 28.5714%;">
+<col style="width: 14.2857%;">
+<col style="width: 57.1429%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Resource</th>
+<th class="tableblock halign-left valign-top">Role</th>
+<th class="tableblock halign-left valign-top">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://w3id.org/suff/ont.ttl">Ontology</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Schema</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The technical, machine-readable, version of this model</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#Supporting Vocabularies">[Supporting Vocabularies]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Vocabulary</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The codelist vocabularies developed for this model and links to others defined elsewhere but expected to be used by this model</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#AnnexA">[AnnexA]</a> &amp; <a href="https://w3id.org/suff/validator.ttl">Validator</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Validation</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The machine-readable validator file used to validate data claiming conformance to this model</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#AnnexB">[AnnexB]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Example</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Examples of data conforming, and some not conforming, to this model</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_elements"><a class="anchor" href="#_elements"></a>5. Elements</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="#Classes">Classes</a></p>
+</li>
+<li>
+<p><a href="#Predicates">Predicates</a></p>
+</li>
+<li>
+<p><a href="#Vocabularies">Vocabularies</a></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>This section defines the data elements of this model.</p>
+</div>
+<div class="paragraph">
+<p>This model is composed of Web Ontology Language (OWL) <a href="#OWL">OWL</a> Classes, Predicates and classification vocabularies. While some predicates are restricted in their use to various classes, the Classes and Predicates are actually defined individually and both are "first class model citizens", with global identity, that can be used in isolation and together. This is in contrast to Unified Modelling Language (UML) <em>Class Diagrams</em> which treat most Predicates as element of particular Classes.</p>
+</div>
+<div class="paragraph">
+<p>This model defines only a few Classes, Predicates and Vocabularies but reuses many from other models. Where it does, basic details of a reference to that Class or Predicates' definition via <code>rdfs:isDefinedBy</code>, and a scope note about using it in this model are given.</p>
+</div>
+<div id="fig-overview" class="imageblock">
+<div class="content">
+<img src="img/overview.svg" alt="overview">
+</div>
+<div class="title">Figure 4. Overview of this model showing major elements</div>
+</div>
+<div class="sect2">
+<h3 id="Classes"><a class="anchor" href="#Classes"></a>5.1. Classes</h3>
+<div class="sect3">
+<h4 id="_classes_defined_by_this_model"><a class="anchor" href="#_classes_defined_by_this_model"></a>5.1.1. Classes defined by this model</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>??</p>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="Address"><a class="anchor" href="#Address"></a>Address</h5>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IRI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>addr:Address</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Preferred Label</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Address</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Definition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Address class represents structured information that allows unambiguous identified of an object for the purposes of identification and location</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Is Defined By</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This model</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Subclass Of</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#CompoundName">[CompoundName]</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provenance</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Derived from <a href="#ISO19160-1">[ISO19160-1]</a>'s <code>Address</code> class</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expected Predicates</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#isNameFor">[isNameFor]</a>, <a href="#hasPart">[hasPart]</a>, <a href="#hasGeocode">[hasGeocode]</a>, <a href="#hasLifecycleStage">[hasLifecycleStage]</a>,</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Example</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-turtle" data-lang="turtle">PREFIX addr: &lt;https://linked.data.gov.au/def/addr/&gt;
+PREFIX apt: &lt;http://linked.data.gov.au/def/address-part-types/&gt;
+PREFIX cn: &lt;https://linked.data.gov.au/def/cn/&gt;
+PREFIX ex: &lt;http://example.com/&gt;
+PREFIX ex-geom: &lt;http://example.com/geometry/&gt;
+PREFIX ex-parcel: &lt;http://example.com/parcel/&gt;
+PREFIX geo: &lt;http://www.opengis.net/ont/geosparql#&gt;
+PREFIX ls: &lt;https://linked.data.gov.au/def/lifecycle/&gt;
+PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX sdo: &lt;https://schema.org/&gt;
+
+&lt;http://example.com/oxford&gt;
+    a addr:Address ;
+    sdo:hasPart [
+        sdo:additionalType apt:numberFirst ;
+        rdf:value 20
+    ] ,
+    [
+        sdo:additionalType apt:road ;
+        rdf:value &lt;https://linked.data.gov.au/dataset/qldaddr/streetLocality/QLD140492&gt; ; # "Oxford Place"
+    ] ,
+    [
+        sdo:additionalType apt:locality ;
+        rdf:value &lt;https://linked.data.gov.au/dataset/qldaddr/locality/loc38f189794e03&gt; ;  # "Shorncliffe"
+    ] ,
+    [
+        sdo:additionalType apt:administrativeArea ;
+        rdf:value &lt;https://linked.data.gov.au/dataset/asgsed3/STE/3&gt; ; # "Queensland"
+    ] ,
+    [
+        sdo:additionalType apt:postcode ;
+        rdf:value 4017
+    ] ;
+    addr:hasGeocode [
+        geo:hasGeometry [
+            sdo:additionalType &lt;https://linked.data.gov.au/def/geocode-types/property-centroid&gt; ;
+            geo:hasGeometry ex-geom:x ;
+        ] ;
+    ] ;
+    cn:isNameFor ex-parcel:161162441 ;
+    ls:hasLifecycleStage [
+        sdo:additionalType ex:Unofficial ;
+    ] ;
+.</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_existing_classes_reused_by_this_model"><a class="anchor" href="#_existing_classes_reused_by_this_model"></a>5.1.2. Existing classes reused by this model</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Feature">Feature</a></p>
+</li>
+<li>
+<p><a href="#Geometry">Geometry</a></p>
+</li>
+<li>
+<p><a href="#GeometryCollection">Geometry Collection</a></p>
+</li>
+<li>
+<p><a href="#Concept">Concept</a></p>
+</li>
+<li>
+<p><a href="#Resource">Resource</a></p>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="Feature"><a class="anchor" href="#Feature"></a>Feature</h5>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IRI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>geo:Feature</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Preferred Label</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Feature</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Definition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A discrete spatial phenomenon in a universe of discourse</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Is Defined By</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#GEO">GEO</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scope Note</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used as the basis for the Road Object class</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="Geometry"><a class="anchor" href="#Geometry"></a>Geometry</h5>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IRI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>geo:Geometry</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Preferred Label</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Geometry</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Definition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A coherent set of direct positions in space. The positions are held within a Spatial Reference System (SRS).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Is Defined By</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#GEO">GEO</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scope Note</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to give spatial representation information for a Road Object</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="GeometryCollection"><a class="anchor" href="#GeometryCollection"></a>GeometryCollection</h5>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IRI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>geo:GeometryCollection</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Preferred Label</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Geometry Collection</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Definition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A collection of individual Geometries</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Is Defined By</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#GEO">GEO</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="Concept"><a class="anchor" href="#Concept"></a>Concept</h5>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IRI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>skos:Concept</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Preferred Label</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Concept</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Definition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An idea or notion; a unit of thought</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Is Defined By</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#SKOS">SKOS</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scope Note</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to indicate a value that should come from a vocabulary (modelled as a `skos:ConceptScheme)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="Resource"><a class="anchor" href="#Resource"></a>Resource</h5>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IRI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rdfs:Resource</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Preferred Label</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resource</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Definition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The class resource, everything</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Is Defined By</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#RDFS">RDFS</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scope Note</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to indicate any kind of RDF value - a literal, IRI or Blank Node</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Predicates"><a class="anchor" href="#Predicates"></a>5.2. Predicates</h3>
+<div class="sect3">
+<h4 id="_predicates_defined_by_this_model"><a class="anchor" href="#_predicates_defined_by_this_model"></a>5.2.1. Predicates defined by this model</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#hasGeometries">has geometries</a></p>
+</li>
+<li>
+<p><a href="#levelOfMeasurement">level of measurement</a></p>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="hasGeometries"><a class="anchor" href="#hasGeometries"></a>hasGeometries</h5>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IRI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>:hasGeometries</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Preferred Label</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">has geometries</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Definition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates a collection of spatial representations for a given Feature</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Is Defined By</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This model</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Domain</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#Feature">Feature</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Range</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#GeometryCollection">GeometryCollection</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="levelOfMeasurement"><a class="anchor" href="#levelOfMeasurement"></a>levelOfMeasurement</h5>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IRI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>:levelOfMeasurement</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Preferred Label</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">level of measurement</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Definition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates the level of measurement - nature of information within the values assigned to variables - within members of a given collection</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Is Defined By</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This model</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Domain</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#GeometryCollection">GeometryCollection</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Range</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#Concept">Concept</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_existing_predicates_reused_by_this_model"><a class="anchor" href="#_existing_predicates_reused_by_this_model"></a>5.2.2. Existing predicates reused by this model</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#hasGeometry">has geometry</a></p>
+</li>
+<li>
+<p><a href="#member">member</a></p>
+</li>
+<li>
+<p><a href="#_1">_1</a></p>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="hasGeometry"><a class="anchor" href="#hasGeometry"></a>hasGeometry</h5>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IRI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>geo:hasGeometry</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Preferred Label</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">has geometry</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Definition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A spatial representation for a given Feature</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Is Defined By</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#GEO">GEO</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Domain</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#Feature">Feature</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Range</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#Geometry">Geometry</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scope Note</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Used to indicate the Geometry of a Feature, such as a Road Object</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="member"><a class="anchor" href="#member"></a>member</h5>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IRI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rdfs:member</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Preferred Label</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">member</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Definition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A member of the subject resource</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Is Defined By</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#GEO">GEO</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Domain</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#Resource">Resource</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Range</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#Resource">Resource</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scope Note</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In the SUFF Model, use this predicate to indicate the member <a href="#Geometry">Geometry</a> instances within a <a href="#GeometryCollection">GeometryCollection</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_1"><a class="anchor" href="#_1"></a>_1</h5>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IRI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rdfs:_1</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Preferred Label</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">firs member</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Definition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An instance of the <a href="https://www.w3.org/TR/rdf12-schema/#ch_containermembershipproperty">rdfs:ContainerMembershipProperty</a> indicating the first member in a collection</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Is Defined By</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#RDFS">RDFS</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Subproperty Of</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#member">member</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scope Note</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In the SUFF Model, use this predicate to indicate the first member <a href="#Geometry">Geometry</a> instance within an ordered <a href="#GeometryCollection">GeometryCollection</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Vocabularies"><a class="anchor" href="#Vocabularies"></a>5.3. Vocabularies</h3>
+<div class="paragraph">
+<p>This model uses a vocabulary of Levels of Measurement to provide values for the range of the predicate <a href="#levelOfMeasurement">level of measurement</a>. that vocabulary is published online at <strong><a href="https://linked.data.gov.au/def/levels-of-measurement" class="bare">https://linked.data.gov.au/def/levels-of-measurement</a></strong>.</p>
+</div>
+<div class="paragraph">
+<p>A simple listing of that vocabulary is also given below.</p>
+</div>
+<div class="sect3">
+<h4 id="_levels_of_measurement"><a class="anchor" href="#_levels_of_measurement"></a>5.3.1. Levels of Measurement</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><a href="https://linked.data.gov.au/def/levels-of-measurement" class="bare">https://linked.data.gov.au/def/levels-of-measurement</a></strong></p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">IRI</th>
+<th class="tableblock halign-left valign-top">Preferred Label</th>
+<th class="tableblock halign-left valign-top">Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://linked.data.gov.au/def/levels-of-measurement/nominal"><code>lom:nominal</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">nominal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The nominal level differentiates between items or subjects based only on their names or (meta-)categories and other qualitative classifications they belong to; thus dichotomous data involves the construction of classifications as well as the classification of items</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://linked.data.gov.au/def/levels-of-measurement/ordinal"><code>lom:ordinal</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ordinal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The ordinal level allows for rank order (1st, 2nd, 3rd, etc.) by which data can be sorted but still does not allow for a relative degree of difference between them</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://linked.data.gov.au/def/levels-of-measurement/interval"><code>lom:interval</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">interval</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The interval type allows for defining the degree of difference between measurements, but not the ratio between measurements</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://linked.data.gov.au/def/levels-of-measurement/ratio"><code>lom:ratio</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ratio</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The ratio type takes its name from the fact that measurement is the estimation of the ratio between a magnitude of a continuous quantity and a unit of measurement of the same kind</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rules"><a class="anchor" href="#_rules"></a>6. Rules</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_topological_functions"><a class="anchor" href="#_topological_functions"></a>7. Topological Functions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section defines topological functions that can be performed on spatial data with uncertainty, as represented by the <a href="#_elements">Elements</a> of this model in accordance with this model&#8217;s <a href="#_rules">Rules</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_bibliography"><a class="anchor" href="#_bibliography"></a>Bibliography</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a id="AS4189:2011"></a> AS4189:2011</dt>
+<dd>
+<p>Standards Australia. <em>AS/NZS 4819:2011 Rural and urban addressing</em></p>
+</dd>
+<dt class="hdlist1"><a id="CNM"></a> CNM</dt>
+<dd>
+<p>Australian Government Linked Data Working Group. <em>Compound Naming Model</em>. Semantic Web data model (2023). <a href="https://linked.data.gov.au/def/cn" class="bare">https://linked.data.gov.au/def/cn</a></p>
+</dd>
+<dt class="hdlist1"><a id="CONNEGP"></a> CONNEGP</dt>
+<dd>
+<p>World Wide Web Consortium, <em>Content Negotiation by Profile</em>, W3C Working Draft (20 March 2022). <a href="https://w3c.github.io/dx-connegp/connegp/" class="bare">https://w3c.github.io/dx-connegp/connegp/</a></p>
+</dd>
+<dt class="hdlist1"><a id="GEO"></a> GEO</dt>
+<dd>
+<p>Open Geospatial Consortium, <em>OGC GeoSPARQL - A Geographic Query Language for RDF Data, Version 1.1</em> (2021). OGC Implementation Specification. <a href="http://www.opengis.net/doc/IS/geosparql/1.1" class="bare">http://www.opengis.net/doc/IS/geosparql/1.1</a></p>
+</dd>
+<dt class="hdlist1"><a id="GNAF"></a> GNAF</dt>
+<dd>
+<p>Geoscape Australia. <em>Geocoded National Address File, G-NAF</em> (2023). <a href="https://data.gov.au/dataset/ds-dga-19432f89-dc3a-4ef3-b943-5326ef1dbecc" class="bare">https://data.gov.au/dataset/ds-dga-19432f89-dc3a-4ef3-b943-5326ef1dbecc</a></p>
+</dd>
+<dt class="hdlist1"><a id="GN"></a> GN</dt>
+<dd>
+<p>Queensland Spatial Information. <em>Geographical Names Model</em> (2023). <a href="https://linked.data.gov.au/def/gn" class="bare">https://linked.data.gov.au/def/gn</a></p>
+</dd>
+<dt class="hdlist1"><a id="ISO-IEC-14977"></a> ISO-IEC-14977</dt>
+<dd>
+<p>International Organization for Standardization, ISO/IEC 14977 : 1996(E): Extended Backus–Naur form. International Organization for Standardization (1996). <a href="https://www.cl.cam.ac.uk/~mgk25/iso-14977.pdf" class="bare">https://www.cl.cam.ac.uk/~mgk25/iso-14977.pdf</a></p>
+</dd>
+<dt class="hdlist1"><a id="ISO19101-1"></a> ISO19101-1</dt>
+<dd>
+<p>International Organization for Standardization, <em>ISO 19101-1:2014 Geographic information — Reference model — Part 1: Fundamentals</em> (2014)</p>
+</dd>
+<dt class="hdlist1"><a id="ISO19125-1"></a> ISO19125-1</dt>
+<dd>
+<p>International Organization for Standardization, ISO 19125-1: Geographic information — Simple Feature Access - Part 1: Common Architecture (2004)</p>
+</dd>
+<dt class="hdlist1"><a id="ISO19156"></a> ISO19156</dt>
+<dd>
+<p>International Organization for Standardization, <em>ISO 19156: Geographic information — Observations and measurements</em> (2011)</p>
+</dd>
+<dt class="hdlist1"><a id="KIRCH"></a> KIRCH</dt>
+<dd>
+<p>Kirch, W. (eds), <em>Level of Measurement</em> (2008). In: Encyclopedia of Public Health. Springer, Dordrecht. <a href="https://doi.org/10.1007/978-1-4020-5614-7_1971" class="bare">https://doi.org/10.1007/978-1-4020-5614-7_1971</a></p>
+</dd>
+<dt class="hdlist1"><a id="OGC-06-103r4"></a> OGC-06-103r4</dt>
+<dd>
+<p>Open Geospatial Consortium: OGC 06-103r4 OpenGIS® Implementation Standard for Geographic information — Simple feature access — Part 1: Common architecture. <a href="http://www.opengis.net/doc/is/sfa/1.2.1" class="bare">http://www.opengis.net/doc/is/sfa/1.2.1</a></p>
+</dd>
+<dt class="hdlist1"><a id="OWL"></a> OWL</dt>
+<dd>
+<p>World Wide Web Consortium, <em>OWL 2 Web Ontology Language Document Overview (Second Edition)</em>, W3C Recommendation (11 December 2012). <a href="https://www.w3.org/TR/owl2-overview/" class="bare">https://www.w3.org/TR/owl2-overview/</a></p>
+</dd>
+<dt class="hdlist1"><a id="PROF"></a> PROF</dt>
+<dd>
+<p>World Wide Web Consortium, <em>The Profiles Vocabulary</em>, W3C Working Group Note (18 December 2019). <a href="https://www.w3.org/TR/dx-prof/" class="bare">https://www.w3.org/TR/dx-prof/</a></p>
+</dd>
+<dt class="hdlist1"><a id="PROV"></a> PROV</dt>
+<dd>
+<p>World Wide Web Consortium, <em>The Profiles Vocabulary</em>, W3C Working Group Note (18 December 2019). <a href="https://www.w3.org/TR/dx-prof/" class="bare">https://www.w3.org/TR/dx-prof/</a></p>
+</dd>
+<dt class="hdlist1"><a id="RDF"></a> RDF</dt>
+<dd>
+<p>World Wide Web Consortium, <em>RDF 1.1 Concepts and Abstract Syntax</em>, W3C Recommendation (25 February 2014). <a href="https://www.w3.org/TR/rdf11-concepts/" class="bare">https://www.w3.org/TR/rdf11-concepts/</a></p>
+</dd>
+<dt class="hdlist1"><a id="RDFS"></a> RDFS</dt>
+<dd>
+<p>World Wide Web Consortium, <em>RDF 1.2 Schema</em>, W3C First Public Working Draft (16 May 2023). <a href="https://www.w3.org/TR/rdf12-schema/" class="bare">https://www.w3.org/TR/rdf12-schema/</a></p>
+</dd>
+<dt class="hdlist1"><a id="SDO"></a> SDO</dt>
+<dd>
+<p>W3C Schema.org Community Group, <em>schema.org</em>. Community ontology (2015). <a href="https://schema.org" class="bare">https://schema.org</a></p>
+</dd>
+<dt class="hdlist1"><a id="SHACL"></a> SHACL</dt>
+<dd>
+<p>World Wide Web Consortium, <em>Shapes Constraint Language (SHACL)</em>, W3C Recommendation (20 July 2017). <a href="https://www.w3.org/TR/shacl/" class="bare">https://www.w3.org/TR/shacl/</a></p>
+</dd>
+<dt class="hdlist1"><a id="SSN"></a> SSN</dt>
+<dd>
+<p>World Wide Web Consortium, <em>Semantic Sensor Network Ontology</em>, W3C Recommendation (19 October 2017). <a href="https://www.w3.org/TR/vocab-ssn/" class="bare">https://www.w3.org/TR/vocab-ssn/</a></p>
+</dd>
+<dt class="hdlist1"><a id="SKOS"></a> SKOS</dt>
+<dd>
+<p>World Wide Web Consortium, <em>SKOS Simple Knowledge Organization System Reference</em>, W3C Recommendation (18 August 2009). <a href="https://www.w3.org/TR/skos-reference/" class="bare">https://www.w3.org/TR/skos-reference/</a></p>
+</dd>
+<dt class="hdlist1"><a id="TTL"></a> TTL</dt>
+<dd>
+<p>World Wide Web Consortium, <em>RDF 1.1 Turtle Terse RDF Triple Language</em>, W3C Recommendation (25 February 2014). <a href="https://www.w3.org/TR/turtle/" class="bare">https://www.w3.org/TR/turtle/</a></p>
+</dd>
+<dt class="hdlist1"><a id="XSD"></a> XSD</dt>
+<dd>
+<p>World Wide Web Consortium, <em>XML Schema Part 2: Datatypes, Second Edition</em>, W3C Recommendation (28 October 2004). <a href="http://www.w3.org/TR/xmlschema-2/" class="bare">http://www.w3.org/TR/xmlschema-2/</a>.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<hr>
+<div class="footnote" id="_footnotedef_1">
+<a href="#_footnoteref_1">1</a>. See the following ESRI product video at 8:03: <a href="https://www.esri.com/arcgis-blog/products/arcgis-pro/mapping/how-to-visualize-uncertainty-for-lines/" class="bare">https://www.esri.com/arcgis-blog/products/arcgis-pro/mapping/how-to-visualize-uncertainty-for-lines/</a>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2024-03-17 12:17:34 UTC
+</div>
+</div>
+</body>
+</html>
