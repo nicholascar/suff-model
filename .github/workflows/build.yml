@@ -28,10 +28,10 @@ jobs:
         asciidoctor spec/00-master.adoc -o docs/model.html
         echo "Add RDF files to docs/"
         mkdir docs/code
-        cp *.ttl docs/
+        cp -r spec/code docs/code
         echo "Add images to docs/"
         mkdir docs/img
-        cp -r img docs/
+        cp -r spec/img docs/img
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
