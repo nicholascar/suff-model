@@ -108,8 +108,8 @@ This document is this model's "Specification" which is its authoritative, human-
 |===
 | Resource | Role | Notes
 
-| https://w3id.org/suffer/ont.ttl[Ontology] | _Schema_ | The technical, machine-readable, version of this model
+| https://w3id.org/suff/ont.ttl[Ontology] | _Schema_ | The technical, machine-readable, version of this model
 | <<Supporting Vocabularies>> | _Vocabulary_ | The codelist vocabularies developed for this model and links to others defined elsewhere but expected to be used by this model
-| <<AnnexA>> & https://w3id.org/suffer/validator.ttl[Validator] | _Validation_ | The machine-readable validator file used to validate data claiming conformance to this model
+| <<AnnexA>> & https://w3id.org/suff/validator.ttl[Validator] | _Validation_ | The machine-readable validator file used to validate data claiming conformance to this model
 | <<AnnexB>> | _Example_ | Examples of data conforming, and some not conforming, to this model
 |===

@@ -1,4 +1,4 @@
-= Spatial Uncertainty For Feature Elements Representation (SUFFER) Model
+= Spatial Uncertainty for Features & Functions (SUFF) Model
 :toc: left
 :table-stripes: even
 :sectids:
@@ -24,11 +24,9 @@ include::04-principles.adoc[]
 
 include::05-elements.adoc[]
 
-include::06-vocabularies.adoc[]
+include::06-rules.adoc[]
 
-include::07-rules.adoc[]
-
-include::08-topo-functions.adoc[]
+include::07-topo-functions.adoc[]
 
 :sectnums!:
 

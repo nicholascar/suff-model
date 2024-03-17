@@ -2,21 +2,21 @@
 
 === Abstract
 
-This model builds on elements of the GeoSPARQL 1.1 ontology to cater for spatial uncertainty and which allows for fuzzy but deterministic visualisations and probabilistic topological functions.
+This is a Semantic Web model that builds on elements of the GeoSPARQL 1.1 ontology to cater for the representation of spatial uncertainty allowing for deterministic fuzzy visualisations and probabilistic topological functions.
 
 === Namespaces
 
-This model uses the <<GEO, GeoSPARQL 1.1>> namespace and those of several others from well-known and mostly standardised ontologies as well as its own - `suffer`. All namespaces used, and prefixes for them, are listed in the table below.
+This model uses the <<GEO, GeoSPARQL 1.1>> namespace and those of several others from well-known and mostly standardised ontologies as well as its own - `suff`. All namespaces used, and prefixes for them, are listed in the table below.
 
 [width=100%, frame=none, grid=none, cols="1,4,5"]
 |===
 |Prefix | Namespace | Description
 
-| `*:*` | `*http://w3id.org/suffer/*` | *This model*
+| `*:*` | `*http://w3id.org/suff/*` | *This model*
 | `lom` | `https://linked.data.gov.au/def/levels-of-measurement/` | Levels of Measurement vocabulary namespace
 | `ex` | `http://example.com/` | Non-resolving namespace for examples
 | `geo` | `http://www.opengis.net/ont/geosparql#` | GeoSPARQL Ontology Namespace
-| `geof` | `http://www.opengis.net/def/function/geosparql/` GeoSPARQL Functions Namespace
+| `geof` | `http://www.opengis.net/def/function/geosparql/` | GeoSPARQL Functions Namespace
 | `owl` | `http://www.w3.org/2002/07/owl#` | Web Ontology Language ontology
 | `rdfs` | `http://www.w3.org/2000/01/rdf-schema#` | RDF Schema ontology
 | `sosa` | `http://www.w3.org/ns/sosa/` | Sensor, Observation, Sample, and Actuator ontology

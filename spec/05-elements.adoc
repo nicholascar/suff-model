@@ -1,10 +1,14 @@
 == Elements
 
+. <<Classes>>
+. <<Predicates>>
+. <<Vocabularies>>
+
 This section defines the data elements of this model.
 
-This model is composed of Web Ontology Language (OWL) <<OWL>> Classes and Properties. While some properties are restricted in their use to various classes, the Classes and Properties are actually defined individually and both are "first class model citizens", with global identity, that can be used in isolation as well as together. This is in contrast to Unified Modelling Language (UML) _Class Diagrams_ which treat most Properties as element of particular Classes.
+This model is composed of Web Ontology Language (OWL) <<OWL>> Classes, Predicates and classification vocabularies. While some predicates are restricted in their use to various classes, the Classes and Predicates are actually defined individually and both are "first class model citizens", with global identity, that can be used in isolation and together. This is in contrast to Unified Modelling Language (UML) _Class Diagrams_ which treat most Predicates as element of particular Classes.
 
-This model defines only three Classes and no Properties but reuses many Classes and Properties from other models. Where it does, basic details of, a reference to that Class or Properties' definition via `rdfs:isDefinedBy`, and a scope note about using it in this model are given.
+This model defines only a few Classes, Predicates and Vocabularies but reuses many from other models. Where it does, basic details of a reference to that Class or Predicates' definition via `rdfs:isDefinedBy`, and a scope note about using it in this model are given.
 
 [[fig-overview]]
 .Overview of this model showing major elements
@@ -31,7 +35,7 @@ image::img/overview.svg[]
 | Is Defined By | This model
 | Subclass Of | <<CompoundName>>
 | Provenance | Derived from <<ISO19160-1>>'s `Address` class
-| Expected Properties | <<isNameFor>>, <<hasPart>>, <<hasGeocode>>, <<hasLifecycleStage>>,
+| Expected Predicates | <<isNameFor>>, <<hasPart>>, <<hasGeocode>>, <<hasLifecycleStage>>,
 | Example 
 a| [source,turtle]
 ----
@@ -160,10 +164,10 @@ PREFIX sdo: <https://schema.org/>
 |===
 
 
-[[Properties]]
-=== Properties
+[[Predicates]]
+=== Predicates
 
-==== Properties defined by this model
+==== Predicates defined by this model
 
 * <<hasGeometries, has geometries>>
 * <<levelOfMeasurement, level of measurement>>
@@ -198,7 +202,7 @@ PREFIX sdo: <https://schema.org/>
 | Range | <<Concept>>
 |===
 
-==== Existing properties reused by this model
+==== Existing predicates reused by this model
 
 * <<hasGeometry, has geometry>>
 * <<member>>
@@ -233,7 +237,7 @@ PREFIX sdo: <https://schema.org/>
 | Is Defined By | <<GEO>>
 | Domain | <<Resource>>
 | Range | <<Resource>>
-| Scope Note | In the SUFFER Model, use this predicate to indicate the member <<Geometry>> instances within a <<GeometryCollection>>
+| Scope Note | In the SUFF Model, use this predicate to indicate the member <<Geometry>> instances within a <<GeometryCollection>>
 |===
 
 [[_1]]
@@ -248,5 +252,27 @@ PREFIX sdo: <https://schema.org/>
 | Definition | An instance of the https://www.w3.org/TR/rdf12-schema/#ch_containermembershipproperty[rdfs:ContainerMembershipProperty] indicating the first member in a collection
 | Is Defined By | <<RDFS>>
 | Subproperty Of | <<member>>
-| Scope Note | In the SUFFER Model, use this predicate to indicate the first member <<Geometry>> instance within an ordered <<GeometryCollection>>
+| Scope Note | In the SUFF Model, use this predicate to indicate the first member <<Geometry>> instance within an ordered <<GeometryCollection>>
+|===
+
+
+[[Vocabularies]]
+=== Vocabularies
+
+This model uses a vocabulary of Levels of Measurement to provide values for the range of the predicate <<levelOfMeasurement, level of measurement>>. that vocabulary is published online at *https://linked.data.gov.au/def/levels-of-measurement*.
+
+A simple listing of that vocabulary is also given below.
+
+==== Levels of Measurement
+
+* *https://linked.data.gov.au/def/levels-of-measurement*
+
+[cols="1,1,3"]
+|===
+| IRI | Preferred Label | Definition
+
+| https://linked.data.gov.au/def/levels-of-measurement/nominal[`lom:nominal`] | nominal | The nominal level differentiates between items or subjects based only on their names or (meta-)categories and other qualitative classifications they belong to; thus dichotomous data involves the construction of classifications as well as the classification of items
+| https://linked.data.gov.au/def/levels-of-measurement/ordinal[`lom:ordinal`] | ordinal | The ordinal level allows for rank order (1st, 2nd, 3rd, etc.) by which data can be sorted but still does not allow for a relative degree of difference between them
+| https://linked.data.gov.au/def/levels-of-measurement/interval[`lom:interval`] | interval | The interval type allows for defining the degree of difference between measurements, but not the ratio between measurements
+| https://linked.data.gov.au/def/levels-of-measurement/ratio[`lom:ratio`] | ratio | The ratio type takes its name from the fact that measurement is the estimation of the ratio between a magnitude of a continuous quantity and a unit of measurement of the same kind
 |===

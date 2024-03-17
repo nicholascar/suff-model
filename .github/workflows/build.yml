@@ -1,0 +1,39 @@
+name: Auto-buid HTML
+
+on:
+  push:
+      branches:
+          - main
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2.3.1
+
+    - name: Build
+      working-directory: ./
+      run: |
+        echo "installing asciidoctor"
+        sudo apt-get install asciidoctor ruby -y
+        echo "Making deployment dir - docs/"
+        mkdir docs
+        echo "Add README to docs/"
+        asciidoctor README.adoc -o docs/index.html
+        echo "Add model to docs/"
+        asciidoctor spec/00-master.adoc -o docs/model.html
+        echo "Add RDF files to docs/"
+        mkdir docs/code
+        cp *.ttl docs/
+        echo "Add images to docs/"
+        mkdir docs/img
+        cp -r img docs/
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+         BRANCH: gh-pages
+         FOLDER: docs

@@ -1,15 +1,20 @@
 == Introduction
 
-This model defines ways of arranging models elements from <<GEO, GeoSPARQL>>, other common https://en.wikipedia.org/wiki/Semantic_Web[Semantic Web] models such as <<SDO, schema.org>> and some of its own to represent uncertainty in the spatial position of geospatial features.
+This model defines ways of arranging models elements from <<GEO, GeoSPARQL>>, other common https://en.wikipedia.org/wiki/Semantic_Web[Semantic Web] models such as <<SDO, schema.org>>, and some of its own elements to represent uncertainty in the position of geospatial features. By representing uncertainty in the data, this model removes possible ambiguity in the presentation of features with positional uncertainty and allows for their use with topological functions.
 
-The figure below and code listing that follow it give graphical and data views of a simple example of this model used to represent a feature with spatial uncertainty.
+The figure below and code listing that follow it give graphical and data views of simple example data created according to this model that represent a feature with spatial uncertainty.
 
-[[fig-ex1]]
-.A simple example of a geospatial feature with positional uncertainty - the occurrence of gold in a portion of the earth's crust
-image::img/overview.svg[]
+[id="fig-ex1",width="50%",align="center"]
+.A simple example of a geospatial feature with positional uncertainty - the location of an Indigenous people's homeland area. The polygons A, B, C & D give different estimates for the extent of the area with A being the most certain and D the least.
+image::img/ex1.svg[]
 
+.Listing 1: Example data for the figure above
+[source, turtle]
+----
+include::code/ex1.ttl[]
+----
 
-The following section describes the motivation for this work
+The following subsection in this Introduction describes the motivation for this work and the final subsection describes the structure of this specification.
 
 === Motivation
 
@@ -33,13 +38,13 @@ This model encodes uncertainty in the data itself which, with the rules presente
 
 This model provides:
 
-. Principles
+. <<Principles>>
 .. A series of principles describing the scope of what this model is intending to offer
-. Elements
+. <<Elements>>
 .. New Semantic Web Classes and Predicated defined here and guided reuse of Classes and Predicates from other models to represent uncertainty
-. Rules
+. <<Rules>>
 .. A series of rules that must be followed in the use of the elements of this model to ensure consistency in implementation
-. Topological Functions
+. <<Topological Functions>>
 .. Definitions for topological functions that can be performed on spatial data with uncertainty, as represented by the Elements of this model in accordance with this model's Rules
 
 and even a https://docs.ogc.org/is/22-047r1/22-047r1.html#_class_geogeometrycollection[`Geometry Collection`] class which can be used to associate multiple geometries with a feature. This is the core of this model since multiple geometries for a feature can be used to convey location uncertainty in several ways - see the <<Principles>> below.

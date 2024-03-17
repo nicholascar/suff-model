@@ -1,14 +1,14 @@
-= Spatial Uncertainty & Fuzzy Feature Elements Representation (SUFFER) Ontology
+= Spatial Uncertainty for Features & functions (SUFF) Model
 
 This repository contains the source code for an ontology that extends https://docs.ogc.org/is/22-047r1/22-047r1.html[GeoSPARQL 1.1] to cater for uncertainty, fuzziness and probabilistic functions.
 
 This ontology is described in the forthcoming paper submitted to [GeoLD2024](https://i3mainz.github.io/GeoLD2024/), the 4th International Workshop on Geospatial Linked Data at [ESWC 2024](https://2024.eswc-conferences.org) in May 2024:
 
-* https://github.com/nicholascar/geold24-suffer[SUFFER @ GeoLD '24]
+* https://github.com/nicholascar/geold24-suff[SUFF @ GeoLD '24]
 
-The ontology is available in RDF within this repository - `suffer.ttl` and online in documented form at:
+The ontology is available in RDF within this repository - `suff.ttl` and online in documented form at:
 
-* https://nicholascar.github.io/suffer-ont/[https://w3id.org/suffer]
+* https://nicholascar.github.io/suff-model/[https://w3id.org/suff]
 
 == License & Use
 
