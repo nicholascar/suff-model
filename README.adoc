@@ -1,4 +1,4 @@
-= Spatial Uncertainty for Features & functions (SUFF) Model
+= Spatial Uncertainty for Features & Functions (SUFF) Model
 
 This repository contains the source code for an ontology that extends https://docs.ogc.org/is/22-047r1/22-047r1.html[GeoSPARQL 1.1] to cater for uncertainty, fuzziness and probabilistic functions.
 
