@@ -24,14 +24,16 @@ jobs:
         mkdir docs
         echo "Add README to docs/"
         asciidoctor README.adoc -o docs/index.html
-        echo "Add model to docs/"
+        echo "Add spec to docs/"
         asciidoctor spec/00-master.adoc -o docs/spec.html
-        echo "Add RDF files to docs/"
+        echo "Add spec RDF files to docs/"
         mkdir docs/code
         cp spec/code/* docs/code
-        echo "Add images to docs/"
+        echo "Add spec images to docs/"
         mkdir docs/img
         cp spec/img/* docs/img
+        echo "Add ont & validator RDF to docs/"
+        cp *.ttl docs/
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
