@@ -6,9 +6,9 @@ This ontology is described in the forthcoming paper submitted to [GeoLD2024](htt
 
 * https://github.com/nicholascar/geold24-suff[SUFF @ GeoLD '24]
 
-The ontology is available in RDF within this repository - `suff.ttl` and online in documented form at:
+The ontology is available in RDF within this repository - `ont.ttl` and online in documented form at:
 
-* https://nicholascar.github.io/suff-model/[https://w3id.org/suff]
+* *https://w3id.org/suff*
 
 == License & Use
 
