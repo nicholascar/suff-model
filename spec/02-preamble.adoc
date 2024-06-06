@@ -12,7 +12,7 @@ This model uses the <<GEO, GeoSPARQL 1.1>> namespace and those of several others
 |===
 |Prefix | Namespace | Description
 
-| `*:*` | `*http://w3id.org/suff/*` | *This model*
+| `*suff:*` | `*http://w3id.org/suff/*` | *This model*
 | `lom` | `https://linked.data.gov.au/def/levels-of-measurement/` | Levels of Measurement vocabulary namespace
 | `ex` | `http://example.com/` | Non-resolving namespace for examples
 | `geo` | `http://www.opengis.net/ont/geosparql#` | GeoSPARQL Ontology Namespace

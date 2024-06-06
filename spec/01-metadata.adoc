@@ -6,7 +6,7 @@
 |**https://schema.org/name[Name]** | Spatial Uncertainty for Features & Functions (SUFF) Model
 |**https://schema.org/description[Description]** | A Semantic Web model that builds on elements of the GeoSPARQL 1.1 ontology to cater for the representation of spatial uncertainty allowing for deterministic fuzzy visualisations and probabilistic topological functions
 |**https://schema.org/dateCreated[Date Created]** | 2024-03-15
-|**https://schema.org/dateModified[Modified]** | 2024-03-17
+|**https://schema.org/dateModified[Modified]** | 2024-05-30
 |**https://schema.org/dateIssued[Date Issued]** | 2024-03-15
 |**https://schema.org/creator[Creator]** | https://orcid.org/0000-0002-8742-7730[Nicholas J. Car]
 |**https://schema.org/publisher[Publisher]** | https://linked.data.gov.au/org/anu[Australian National University]
