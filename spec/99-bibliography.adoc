@@ -2,7 +2,13 @@
 
 [[AS4189:2011]] AS4189:2011:: Standards Australia. _AS/NZS 4819:2011 Rural and urban addressing_
 
+[[BURROUGH-FRANK]] BURROUGH-FRANK:: Burrough, P.A. and Frank, A.U. (Eds.) _Geographic Objects with Indeterminate Boundaries_. CRC Press: Boca Raton, FL (1996).  https://doi.org/10.1201/9781003062660 
+
 [[CNM]] CNM:: Australian Government Linked Data Working Group. _Compound Naming Model_. Semantic Web data model (2023). https://linked.data.gov.au/def/cn
+
+[[COHN-GOTTS]] COHN-GOTTS:: Cohn, A.G. and Gotts, N.M. The "egg-yolk" representation of regions with indeterminate boundaries. In _Geographic objects with indeterminate boundaries_. CRC Press (1996). 171-187.
+
+[[DUCKHAM-BOOK]] DUCKHAM-BOOK:: Duckham, M., Sun, Q.C., Worboys, M.F., _GIS: A computing perspective_, 3rd Ed. CRC Press: Boca Raton, FL (2023). http://doi.org/10.1201/9780429168093 
 
 [[CONNEGP]] CONNEGP:: World Wide Web Consortium, _Content Negotiation by Profile_, W3C Working Draft (20 March 2022). https://w3c.github.io/dx-connegp/connegp/
 
@@ -43,5 +49,9 @@
 [[SKOS]] SKOS:: World Wide Web Consortium, _SKOS Simple Knowledge Organization System Reference_, W3C Recommendation (18 August 2009). https://www.w3.org/TR/skos-reference/
 
 [[TTL]] TTL:: World Wide Web Consortium, _RDF 1.1 Turtle Terse RDF Triple Language_, W3C Recommendation (25 February 2014). https://www.w3.org/TR/turtle/
+
+[[WORBOYS-CEUS]] WORBOYS-CEUS:: Worboys, M.F., Computation with imprecise geospatial data. _Computers, Environment and Urban Systems_ 22.2 (1998): 85-106. https://doi.org/10.1016/S0198-9715(98)00023-4 
+
+[[WORBOYS-CLEMENTINI]] WORBOYS-CLEMENTINI:: Worboys, M.F. and Clementini, E., Integration of imperfect spatial information. _Journal of Visual Languages & Computing_ 12.1 (2001): 61-80.https://doi.org/10.1006/jvlc.2000.0187 
 
 [[XSD]] XSD:: World Wide Web Consortium, _XML Schema Part 2: Datatypes, Second Edition_, W3C Recommendation (28 October 2004). http://www.w3.org/TR/xmlschema-2/.
