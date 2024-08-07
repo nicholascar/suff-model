@@ -1,12 +1,12 @@
 = Spatial Uncertainty for Features & Functions (SUFF) Model
 
-This repository contains the source code for an ontology that extends https://docs.ogc.org/is/22-047r1/22-047r1.html[GeoSPARQL 1.1] to cater for uncertainty, fuzziness and probabilistic functions.
+This repository contains the source code for an ontology that extends https://docs.ogc.org/is/22-047r1/22-047r1.html[GeoSPARQL 1.1] to represent uncertainty in the location of geometric features.
 
 This ontology is described in the forthcoming paper submitted to [GeoLD2024](https://i3mainz.github.io/GeoLD2024/), the 4th International Workshop on Geospatial Linked Data at [ESWC 2024](https://2024.eswc-conferences.org) in May 2024:
 
 * https://github.com/nicholascar/geold24-suff[SUFF @ GeoLD '24]
 
-The ontology is available in RDF within this repository - `ont.ttl` and online in documented form at:
+The ontology is available in RDF within this repository - `ont.ttl` and online in documented form [in this repo](spec/00-master.adoc) and at:
 
 * *https://w3id.org/suff*
 
