@@ -2,9 +2,13 @@
 
 [[AS4189:2011]] AS4189:2011:: Standards Australia. _AS/NZS 4819:2011 Rural and urban addressing_
 
+[[BJORKE]] BJORKE:: Bjørke, J.T. Topological relations between fuzzy regions: Derivation of verbal terms. _Fuzzy sets and systems_ 141.3 (2004): 449-467.
+
 [[BURROUGH-FRANK]] BURROUGH-FRANK:: Burrough, P.A. and Frank, A.U. (Eds.) _Geographic Objects with Indeterminate Boundaries_. CRC Press: Boca Raton, FL (1996).  https://doi.org/10.1201/9781003062660 
 
 [[CNM]] CNM:: Australian Government Linked Data Working Group. _Compound Naming Model_. Semantic Web data model (2023). https://linked.data.gov.au/def/cn
+
+[[CLEMENTINI-FELICE]] CLEMENTINI-FELICE:: Clementini, E. and Di Felice, P. Approximate topological relations. _International Journal of Approximate Reasoning_ 16.2 (1997): 173-204.
 
 [[COHN-GOTTS]] COHN-GOTTS:: Cohn, A.G. and Gotts, N.M. The "egg-yolk" representation of regions with indeterminate boundaries. In _Geographic objects with indeterminate boundaries_. CRC Press (1996). 171-187.
 
@@ -40,6 +44,8 @@
 
 [[RDFS]] RDFS:: World Wide Web Consortium, _RDF 1.2 Schema_, W3C First Public Working Draft (16 May 2023). https://www.w3.org/TR/rdf12-schema/
 
+[[ROY-STELL]] ROY-STELL:: Roy, A.J. and Stell, J.G. Spatial relations between indeterminate regions. _International Journal of Approximate Reasoning_ 27.3 (2001): 205-234.
+
 [[SDO]] SDO:: W3C Schema.org Community Group, _schema.org_. Community ontology (2015). https://schema.org
 
 [[SHACL]] SHACL:: World Wide Web Consortium, _Shapes Constraint Language (SHACL)_, W3C Recommendation (20 July 2017). https://www.w3.org/TR/shacl/
@@ -49,6 +55,8 @@
 [[SKOS]] SKOS:: World Wide Web Consortium, _SKOS Simple Knowledge Organization System Reference_, W3C Recommendation (18 August 2009). https://www.w3.org/TR/skos-reference/
 
 [[TTL]] TTL:: World Wide Web Consortium, _RDF 1.1 Turtle Terse RDF Triple Language_, W3C Recommendation (25 February 2014). https://www.w3.org/TR/turtle/
+
+[[WINTER]] WINTER:: Winter, S. Uncertain topological relations between imprecise regions. _International Journal of Geographical Information Science_ 14.5 (2000): 411-430.
 
 [[WORBOYS-CEUS]] WORBOYS-CEUS:: Worboys, M.F., Computation with imprecise geospatial data. _Computers, Environment and Urban Systems_ 22.2 (1998): 85-106. https://doi.org/10.1016/S0198-9715(98)00023-4 
 

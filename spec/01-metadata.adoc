@@ -12,7 +12,7 @@
 |**https://schema.org/publisher[Publisher]** | https://linked.data.gov.au/org/anu[Australian National University]
 |**https://www.w3.org/2009/08/skos-reference/skos.html#historyNote[History Note]** | This profile of GeoSPARQL was made to satisfy various projects' needs in 2023 - 2024
 |**http://purl.org/linked-data/registry#status[Status]** | https://linked.data.gov.au/def/reg-statuses/experimental[Experimental]
-|**https://schema.org/version[Version]** | 0.0.1
+|**https://schema.org/version[Version]** | 0.0.2
 |**https://schema.org/codeRepository[Code Repository]** | https://github.com/nicholascar/suff-model
 |**https://schema.org/license[License]** | https://opensource.org/license/BSD-3-clause[BSD 3-Clause License]
 |**https://schema.org/copyrightNotice[Copyright Notice]** | &copy; Nicholas J. Car, 2024
