@@ -3,7 +3,7 @@
 [width=75%, frame=none, grid=none, cols="2,5"]
 |===
 |**IRI** | `https://w3id.org/suff/spec`
-|**https://schema.org/name[Name]** | Spatial Uncertainty for Features & Figures (SUFF) Model
+|**https://schema.org/name[Name]** | Spatial Uncertainty for Features & Functions (SUFF) Model
 |**https://schema.org/description[Description]** | A Semantic Web model that builds on elements of the GeoSPARQL 1.1 ontology to represent uncertainty in the location of geometric features, supporting cartographic representations as well as analytical functions.
 |**https://schema.org/dateCreated[Date Created]** | 2024-03-15
 |**https://schema.org/dateModified[Modified]** | 2024-08-07
