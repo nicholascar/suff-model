@@ -1,4 +1,4 @@
-= Spatial Uncertainty for Features & Figures (SUFF) Model
+= Spatial Uncertainty for Features & Functions (SUFF) Model
 :toc: left
 :table-stripes: even
 :sectids:
