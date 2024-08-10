@@ -459,13 +459,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_principles">4. Principles</a>
 <ul class="sectlevel2">
-<li><a href="#_uncertainty_in_position_only">4.1. Uncertainty in position only</a></li>
-<li><a href="#_uncertainty_not_in_resolution_or_accuracy">4.2. Uncertainty not in resolution or accuracy</a></li>
-<li><a href="#_deterministic_interpretation">4.3. Deterministic interpretation</a></li>
-<li><a href="#_xxx">4.4. XXX</a></li>
-<li><a href="#_feature_display">4.5. Feature display</a></li>
-<li><a href="#_probabilistic_topological_functions">4.6. Probabilistic Topological Functions</a></li>
-<li><a href="#_model_resources">4.7. Model resources</a></li>
+<li><a href="#_uncertainty_in_location_represented_using_geometry">4.1. Uncertainty in location, represented using geometry</a></li>
+<li><a href="#_core_mechanism">4.2. Core mechanism</a></li>
+<li><a href="#_approximate_topological_relations">4.3. Approximate topological relations</a></li>
 </ul>
 </li>
 <li><a href="#_elements">5. Elements</a>
@@ -511,7 +507,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong><a href="https://schema.org/description">Description</a></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A Semantic Web model that builds on elements of the GeoSPARQL 1.1 ontology to cater for the representation of spatial uncertainty allowing for deterministic fuzzy visualisations and probabilistic topological functions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A Semantic Web model that builds on elements of the GeoSPARQL 1.1 ontology to represent uncertainty in the location of geometric features, supporting cartographic representations as well as analytical functions.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong><a href="https://schema.org/dateCreated">Date Created</a></strong></p></td>
@@ -519,7 +515,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong><a href="https://schema.org/dateModified">Modified</a></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2024-05-30</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2024-08-07</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong><a href="https://schema.org/dateIssued">Date Issued</a></strong></p></td>
@@ -543,7 +539,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong><a href="https://schema.org/version">Version</a></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0.0.1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0.0.2</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong><a href="https://schema.org/codeRepository">Code Repository</a></strong></p></td>
@@ -571,7 +567,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="_abstract"><a class="anchor" href="#_abstract"></a>2.1. Abstract</h3>
 <div class="paragraph">
-<p>This is a Semantic Web model that builds on elements of the GeoSPARQL 1.1 ontology to cater for the representation of spatial uncertainty allowing for deterministic fuzzy visualisations and probabilistic topological functions.</p>
+<p>This is a Semantic Web model that builds on elements of the GeoSPARQL 1.1 ontology to represent uncertainty in the location of geometric features, supporting cartographic representations as well as analytical functions.</p>
 </div>
 </div>
 <div class="sect2">
@@ -691,19 +687,60 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_introduction"><a class="anchor" href="#_introduction"></a>3. Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This model defines ways of arranging models elements from <a href="#GEO">GeoSPARQL</a>, other common <a href="https://en.wikipedia.org/wiki/Semantic_Web">Semantic Web</a> models such as <a href="#SDO">schema.org</a>, and some of its own elements to represent uncertainty in the position of geospatial features. By representing uncertainty in the data, this model removes possible ambiguity in the presentation of features with positional uncertainty and allows for their use with topological functions.</p>
+<p>This model defines ways of arranging models elements from <a href="#GEO">GeoSPARQL</a>, other common <a href="https://en.wikipedia.org/wiki/Semantic_Web">Semantic Web</a> models such as <a href="#SDO">schema.org</a>, and some of its own elements to represent uncertainty in the location of geospatial features.</p>
 </div>
 <div class="paragraph">
-<p>The figure below and code listing that follow it give graphical and data views of simple example data created according to this model that represent a feature with spatial uncertainty.</p>
+<p>For example, a region with a broad boundary (also called an indeterminate boundary, see <a href="#BURROUGH-FRANK">BURROUGH-FRANK</a>) is among the most fundamental representations of uncertainty in location. The figure below shows a simple example of such a region: the red central core is regarded as definitely in the region; the pink penumbra is possibly in the region; and everything else is definitely not in the region.</p>
+</div>
+<div id="fig-bb" class="imageblock text-center">
+<div class="content">
+<img src="img/bb.svg" alt="bb" width="50%">
+</div>
+<div class="title">Figure 3. A classical region with a broad boundary.</div>
+</div>
+<div class="paragraph">
+<p>Such representations are widely used in various simple models of uncertainty, including rough sets (<a href="#WORBOYS-CEUS">WORBOYS-CEUS</a>) and the so-called "egg-yolk model" of indeterminate RCC (region connection calculus) regions (<a href="#COHN-GOTTS">COHN-GOTTS</a>). The listing below provides the example data for the figure above.</p>
+</div>
+<div class="listingblock">
+<div class="title">Listing 1: Example data for the figure above</div>
+<div class="content">
+<pre class="highlight"><code class="language-turtle" data-lang="turtle">PREFIX : &lt;https://w3id.org/suffer/&gt;
+PREFIX ex: &lt;http://example.com/&gt;
+PREFIX geo: &lt;http://www.opengis.net/ont/geosparql#&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX schema: &lt;https://schema.org/&gt;
+PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+
+ex:indeterminate-boundary-region
+    a geo:Feature ;
+    schema:name "Region with indeterminate boundary" ;
+    :hasGeometries [
+        a geo:GeometryCollection ;
+        rdfs:_1 [
+            a geo:Geometry ;
+            schema:name "Definitely in" ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+        ] ;
+        rdfs:_2 [
+            a geo:Geometry ;
+            schema:name "Possibly in" ;
+            geo:asWKT "..."^^geo:wktLiteral ;
+        ] ;
+    ] ;
+.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The idea may be extended in a variety of different ways. For example, the following figure and code listing provide graphical and data views of a more complex uncertain feature created according to this model.</p>
 </div>
 <div id="fig-ex1" class="imageblock text-center">
 <div class="content">
 <img src="img/ex1.svg" alt="ex1" width="50%">
 </div>
-<div class="title">Figure 3. A simple example of a geospatial feature with positional uncertainty - the location of an Indigenous people&#8217;s homeland area. The polygons A, B, C &amp; D give different estimates for the extent of the area with A being the most certain and D the least.</div>
+<div class="title">Figure 4. A more complex example of a geospatial feature with a broad boundary uncertainty, representing the location of an Indigenous people&#8217;s homeland area. The polygons A, B, C, &amp; D give different estimates for the extent of the area with A being the most certain and D the least.</div>
 </div>
 <div class="listingblock">
-<div class="title">Listing 1: Example data for the figure above</div>
+<div class="title">Listing 2: Example data for the figure above</div>
 <div class="content">
 <pre class="highlight"><code class="language-turtle" data-lang="turtle">PREFIX : &lt;https://w3id.org/suffer/&gt;
 PREFIX ex: &lt;http://example.com/&gt;
@@ -747,84 +784,66 @@ ex:indigenous-homeland-x
 <div class="sect2">
 <h3 id="_motivation"><a class="anchor" href="#_motivation"></a>3.1. Motivation</h3>
 <div class="paragraph">
-<p>The immediate motivation for this model was the need, in multiple projects in 2022 - 2024, to represent the position of features with uncertainty.</p>
+<p>Representing uncertainty in location is one of the most longstanding—and tricky—topics in geographic information science. Many practical applications have the need to represent features with uncertain locations, including representing:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the occurrence of mineral deposits, where the limitations of borehole sampling and interpolation may lead to uncertainty about the correct value at a location (<em>inaccuracy</em>)</p>
+</li>
+<li>
+<p>the occurrence of endangered species, where the exact location may need to be obscured for legal reasons and in order to protect endangered native species from damage or interference (<em>imprecision</em>)</p>
+</li>
+<li>
+<p>the traditional lands of First Nations people, which are intrinsically not definable by precise, measurable extents, and so representation by a region with a crisp boundary is not sensible (<em>vagueness</em>).</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>For example, to represent the traditional homeland areas of some Australian First Nations people which are known to not be sensibly represented with precise positions such as polygons with crisp boundaries due to the naturally fluid nature of First Nations peoples' land occupation patterns.</p>
+<p>These three examples relate to the three fundamental types of "imperfection" (uncertainty) in spatial data defined in <a href="#WORBOYS-CLEMENTINI">WORBOYS-CLEMENTINI</a>: inaccuracy (errors or a lack of correctness in data); imprecision (a lack of detail/exactness in data); and vagueness (a special case of imprecision, where precise boundaries between concepts remain ill-defined). Many other subtypes of uncertainty (such as bias, completeness, ambiguity, granularity, see <a href="#DUCKHAM-BOOK">DUCKHAM-BOOK</a>) can be defined in terms of these three fundamental types, summarized in the figure below.</p>
 </div>
-<div class="paragraph">
-<p>Another example is mineral occurrences: mining companies sample the earth&#8217;s crust to determine where high concentrations of certain minerals are but they do so by sample - boreholes - and only build an incomplete picture of the occurrence area, i.e. one with uncertainty.</p>
+<div id="fig-bb" class="imageblock text-center">
+<div class="content">
+<img src="img/uncertainty.svg" alt="uncertainty" width="50%">
 </div>
-<div class="paragraph">
-<p>A third example is endangered species locations: in Australia, it can be illegal to represent the precise location of endangered native species however representations of the species' location must be made and shared for environmental impact and other land use assessments. Obscured locations are currently provided for such species however the manufactured uncertainty is usually represented as a crisp polygon and additional notes on tolerances. Uncertainty built into the data would be better.</p>
-</div>
-<div class="paragraph">
-<p>The requirement to handle spatial uncertainty is thought to be widespread, for conversations about the potential for doing this hav attracted much interest.</p>
-</div>
-<div class="paragraph">
-<p>GeoSPARQL defines spatial <a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_class_geofeature"><code>Features</code></a> and <a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_geometry_class"><code>Geometry</code></a> classes that can be used, with elements from other well-known Semantic Web models, for data with uncertainty in all the above scenarios however, without dedicated methods for this, the representation and handling of it will differ in implementations.</p>
-</div>
-<div class="paragraph">
-<p>Where spatial uncertainty is handled in mainstream non-Semantic Web Graphical Information Systems (GIS), such as ESRI&#8217;s ArcGIS<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup>, it is handled superficially - in the display of the data, not encoded within the data. This leads to the issue of reproducibility where if data with uncertainty handled superficial is displayed elsewhere, the display may not be the same if the display software is different.</p>
-</div>
-<div class="paragraph">
-<p>This model encodes uncertainty in the data itself which, with the rules presented in the <a href="#_principles">Principles</a> section below, ensure that any software systems can implement the same display. Not only that: if uncertainty is encoded as per this model and the rules adhered to, topological calculations that result in probabilistic outcomes can be implemented against the data too.</p>
+<div class="title">Figure 5. The typology of uncertainty (imperfection in information) after <a href="#WORBOYS-CLEMENTINI">WORBOYS-CLEMENTINI</a>.</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_structure"><a class="anchor" href="#_structure"></a>3.2. Structure</h3>
 <div class="paragraph">
-<p>This model provides:</p>
+<p>GeoSPARQL defines spatial <a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_class_geofeature"><code>Features</code></a> and <a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_geometry_class"><code>Geometry</code></a> classes that can be used, with elements from other well-known Semantic Web models, for data with uncertainty in all the above scenarios. However, without dedicated methods for this, the representation and handling of it will differ in different implementations.</p>
+</div>
+<div class="paragraph">
+<p>Consequently, this model provides:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><a href="#_principles">Principles</a></p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>A series of principles describing the scope of what this model is intending to offer</p>
-</li>
-</ol>
-</div>
+<p><a href="#_principles">Principles</a>: A series of principles describing the scope of what this model is intending to offer</p>
 </li>
 <li>
-<p><a href="#_elements">Elements</a></p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>New Semantic Web Classes and Predicated defined here and guided reuse of Classes and Predicates from other models to represent uncertainty</p>
-</li>
-</ol>
-</div>
+<p><a href="#_elements">Elements</a>: New Semantic Web Classes and Predicates defined here and guided reuse of Classes and Predicates from other models to represent uncertainty</p>
 </li>
 <li>
-<p><a href="#_rules">Rules</a></p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>A series of rules that must be followed in the use of the elements of this model to ensure consistency in implementation</p>
-</li>
-</ol>
-</div>
+<p><a href="#_rules">Rules</a>: A series of rules that must be followed in the use of the elements of this model to ensure consistency in implementation</p>
 </li>
 <li>
-<p><a href="#_topological_functions">Topological Functions</a></p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Definitions for topological functions that can be performed on spatial data with uncertainty, as represented by the Elements of this model in accordance with this model&#8217;s Rules</p>
-</li>
-</ol>
-</div>
+<p><a href="#_topological_functions">Topological Functions</a>: Definitions for topological functions that can be performed on spatial data with uncertainty, as represented by the Elements of this model in accordance with this model&#8217;s Rules</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>and even a <a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_class_geogeometrycollection"><code>Geometry Collection</code></a> class which can be used to associate multiple geometries with a feature. This is the core of this model since multiple geometries for a feature can be used to convey location uncertainty in several ways - see the <a href="#_principles">Principles</a> below.</p>
+<p>Further, the model provides a <a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_class_geogeometrycollection"><code>Geometry Collection</code></a> class which can be used to associate multiple geometries with a feature. This is the core of this model since multiple geometries for a feature can be used to convey location uncertainty in several ways - see the <a href="#_principles">Principles</a> below.</p>
 </div>
 <div class="paragraph">
 <p>GeoSPARQL 1.1 does not, however, provide all the elements needed for deterministic representations of feature location uncertainty, nor does GeoSPARQL 1.1 describe how to perform topological functions on features with uncertain location representation. This model defines conventions for GeoSPARQL 1.1 element use, and introduces several new model elements, for this purpose.</p>
+</div>
+<div class="paragraph">
+<p>Where spatial uncertainty is handled in mainstream non-Semantic Web GIS today, such as ESRI&#8217;s ArcGIS<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup>, it is generally handled only cartographically and then only superficially - in the display of the data, not encoded within the data. This leads to the issue of reproducibility, where cartographic representations are not precisely defined, persistently stored, or reproducible on other systems.</p>
+</div>
+<div class="paragraph">
+<p>By contrast, this model encodes uncertainty in the data itself. Together with the rules presented in the <a href="#_principles">Principles</a> section, the model can provide a basis for any software system to display uncertainty cartographically or analyse uncertainty spatially (such as probabilstic topological interactions).</p>
 </div>
 </div>
 </div>
@@ -833,29 +852,18 @@ ex:indigenous-homeland-x
 <h2 id="_principles"><a class="anchor" href="#_principles"></a>4. Principles</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section give a series of principles describing the scope of what this model is intending to offer.</p>
-</div>
-<div class="paragraph">
-<p>Some of these principles are conceptual and may not be computationally tested against data created in accordance with this model. Other principles are and lead on to rules in the <a href="#_rules">Rules</a> section.</p>
+<p>This section give a series of principles describing the scope of what this model is aims to offer.</p>
 </div>
 <div class="sect2">
-<h3 id="_uncertainty_in_position_only"><a class="anchor" href="#_uncertainty_in_position_only"></a>4.1. Uncertainty in position only</h3>
+<h3 id="_uncertainty_in_location_represented_using_geometry"><a class="anchor" href="#_uncertainty_in_location_represented_using_geometry"></a>4.1. Uncertainty in location, represented using geometry</h3>
 <div class="paragraph">
-<p>This model only directly addresses uncertainty in the position of spatial features. It does not address uncertainty in the values of other feature properties. For example, if a map of average daily temperature for a region was modelled using GeoSPARQL 1.1 and this model&#8217;s elements, uncertainty in the measurement of the temperature values themselves would be out of scope.</p>
+<p>This model only directly addresses the representation of uncertainty in the location of spatial features, where that uncertainty can be captured using a set of geometries.</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">NOTE</dt>
-<dd>
-<p>Many other ontologies provide for the representation of measurement uncertain and simple models such as <a href="#SDO">schema.org</a> include properties such as <a href="https://schema.org/marginOfError">marginOfError</a> for this purpose.</p>
-</dd>
-</dl>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_uncertainty_not_in_resolution_or_accuracy"><a class="anchor" href="#_uncertainty_not_in_resolution_or_accuracy"></a>4.2. Uncertainty not in resolution or accuracy</h3>
 <div class="paragraph">
-<p>This model is not intended to represent spatial resolution or accuracy of positions (geometry elements): these are already representable with elements from <a href="#GEO">GeoSPARQL</a>, see:</p>
+<p>The model does not address uncertainty in the values of other attributes or properties of features. Other ontologies do exist to provide for the representation of measurement uncertainty, including simple models such as <a href="#SDO">schema.org</a> include properties such as <a href="https://schema.org/marginOfError">marginOfError</a> for this purpose.</p>
+</div>
+<div class="paragraph">
+<p>Further, this model is not intended to be used to represent uncertainty in location when a simple property associated with a single geometry would suffice. Such simple representations are already accessible through elements from <a href="#GEO">GeoSPARQL</a>, see:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -867,214 +875,100 @@ ex:indigenous-homeland-x
 </li>
 </ul>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_core_mechanism"><a class="anchor" href="#_core_mechanism"></a>4.2. Core mechanism</h3>
 <div class="paragraph">
-<p>This model aims to allow a user to represent specific values for uncertainty of position for a feature, rather than uncertainty which is unknown to them, perhaps due to the tolerance of instruments used to make position measurements.</p>
+<p>Uncertainty in the location of a feature is captured by linking the feature not to one geometry but to multiple - a geometry collection. Each geometry in the collection conveys part of the representation of the feature&#8217;s location together with a value either being given in the data or inferrable due to the geometry&#8217;s relative position in the collection.</p>
+</div>
+<div class="paragraph">
+<p>The interpretation of the value is partly captured through three levels of measurement, as follows.</p>
+</div>
+<div class="sect3">
+<h4 id="_levels_of_measurement"><a class="anchor" href="#_levels_of_measurement"></a>4.2.1. Levels of measurement</h4>
+<div class="paragraph">
+<p>The SUFF model recognises three levels of measurement<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnotedef_2" title="View footnote.">2</a>]</sup>
+as defined in the <a href="#_levels_of_measurement_2">Levels of Measurement</a> vocabulary in the <a href="#Supporting Vocabularies">[Supporting Vocabularies]</a> section of this model.</p>
+</div>
+<div class="paragraph">
+<p>The three levels defined are:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="#_levels_of_measurement_2">nominal</a>: which differentiates between items based only on their names or category</p>
+</li>
+<li>
+<p><a href="#_levels_of_measurement_2">ordinal</a>: which differentiates between items and assigns a (total) order on those items.</p>
+</li>
+<li>
+<p><a href="#_levels_of_measurement_2">quantity</a>: which differentiates between items and assigns a magnitude to those items.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The level of measurement will be indicated either directly by the predicate <a href="#levelOfMeasurement">level of measurement</a> on a <a href="#GeometryCollection">Geometry Collection</a> instance, or it will be divined from other properties of the geometries. The default value is <em>Nominal</em>.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_deterministic_interpretation"><a class="anchor" href="#_deterministic_interpretation"></a>4.3. Deterministic interpretation</h3>
+<h3 id="_approximate_topological_relations"><a class="anchor" href="#_approximate_topological_relations"></a>4.3. Approximate topological relations</h3>
 <div class="paragraph">
-<p>The aim of this model is to allow a user to convey a defined amount of uncertainty in data and this amount is unambiguous: all users of the data will be able to derive the same amount.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_xxx"><a class="anchor" href="#_xxx"></a>4.4. XXX</h3>
-<div class="paragraph">
-<p>This model defines a number of rules that define the manner in which the spatial representation of features that contain uncertainty is to be interpreted.</p>
-</div>
-<div class="paragraph">
-<p>Uncertainty in position is conveyed by linking the feature not to one geometry but to multiple - a geometry collection. Each geometry in the collection conveys the certainty of the feature&#8217;s location at its boundary with the value either being given in the data or inferrable due to the geometry&#8217;s relative position in the collection.</p>
-</div>
-<div class="paragraph">
-<p>A series of rules, given in the following subsections, define how certainty at each geometry in a collection is to be obtained. These rules are based on the instructions on the level of measurement <a href="#KIRCH">KIRCH</a> relationship between the geometries in a geometry collection contained. The level of measurement will be one of <em>Nominal</em>, <em>Ordinal</em>, <em>Integer</em> or <em>Ratio</em>, as defined in the <a href="#_levels_of_measurement">Levels of Measurement</a> vocabulary in the <a href="#Supporting Vocabularies">[Supporting Vocabularies]</a> section of this model. It will either be indicated directly by the predicate <a href="#levelOfMeasurement">level of measurement</a> on a <a href="#GeometryCollection">Geometry Collection</a> instance, or it will be divined from other properties of the geometries. The default value is <em>Nominal</em>.</p>
-</div>
-<div class="sect3">
-<h4 id="_obtaining_the_level_of_measurement"><a class="anchor" href="#_obtaining_the_level_of_measurement"></a>4.4.1. Obtaining the Level of Measurement</h4>
-<div class="paragraph">
-<p>The following reasoning is to be used to determine the level of measurement of a Geometry Collection.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_rule_nominal_geometries"><a class="anchor" href="#_rule_nominal_geometries"></a>4.4.2. Rule: Nominal geometries</h4>
-
-</div>
-<div class="sect3">
-<h4 id="_rule_ordinal_geometries"><a class="anchor" href="#_rule_ordinal_geometries"></a>4.4.3. Rule: Ordinal geometries</h4>
-
-</div>
-<div class="sect3">
-<h4 id="_rule_interval_geometries"><a class="anchor" href="#_rule_interval_geometries"></a>4.4.4. Rule: Interval geometries</h4>
-
-</div>
-<div class="sect3">
-<h4 id="_rule_ratio_geometries"><a class="anchor" href="#_rule_ratio_geometries"></a>4.4.5. Rule: Ratio geometries</h4>
-
-</div>
-</div>
-<div class="sect2">
-<h3 id="_feature_display"><a class="anchor" href="#_feature_display"></a>4.5. Feature display</h3>
-
-</div>
-<div class="sect2">
-<h3 id="_probabilistic_topological_functions"><a class="anchor" href="#_probabilistic_topological_functions"></a>4.6. Probabilistic Topological Functions</h3>
-<div class="paragraph">
-<div class="title">.If a <a href="#GeometryCollection">Geometry Collection</a> instance indicates its member <a href="#Geometry">Geometries</a> are related by the <a href="#levelOfMeasurement">level of measurement</a> to be a particular level of measurement, that value is to be used</div>
 <p>The <a href="#GEO">GeoSPARQL</a> standard provides both an ontology which defines spatial elements and predicates to indicate topological relationships between them and also function definitions that can be used to calculate those predicates.</p>
 </div>
 <div class="paragraph">
 <p>For example, the predicate <a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#sf_relations"><code>geo:sfWithin</code></a> indicated that its subject is spatially <em>within</em> its object where <em>within</em> is the Simple Features Within relation defined by <a href="#OGC-06-103r4">OGC-06-103r4</a>. The related GeoSPARQL function is <a href="http://www.opengis.net/def/function/geosparql/sfWithin"><code>geof:sfWithin</a> which defines the parameters and results from the function used to calculate the `geo:sfWithin</code> relation between two spatial objects.</p>
 </div>
 <div class="paragraph">
-<p>This model indicates how to calculate the <a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#sf_relations">Simple Features relations</a> between features whose position is uncertain and represented using elements from this model. The general method is described below and specific topological relation calculations follow.</p>
+<p>One objective of this model is to enable the definition of rules that propagate uncertainty in location through to levels of certainty in topological relation. There are an enormous range of different possibilities when computing such a relation in the literature, including <a href="#COHN-GOTTS">COHN-GOTTS</a>, <a href="#CLEMENTINI-FELICE">CLEMENTINI-FELICE</a>, <a href="#BJORKE">BJORKE</a>, <a href="#WINTER">WINTER</a>, <a href="#ROY-STELL">ROY-STELL</a> to name but a few.</p>
 </div>
 <div class="sect3">
-<h4 id="_general_method_for_probabilistic_topological_function_calculation"><a class="anchor" href="#_general_method_for_probabilistic_topological_function_calculation"></a>4.6.1. General method for probabilistic topological function calculation</h4>
+<h4 id="_minimal_method_for_approximate_topological_relation_computation"><a class="anchor" href="#_minimal_method_for_approximate_topological_relation_computation"></a>4.3.1. Minimal method for approximate topological relation computation</h4>
 <div class="paragraph">
-<p>For a spatial feature <code>A</code> with certain position - a single geometry - and spatial feature <code>B</code> with uncertain geometry - as conveyed by this model - calculate a simple feature relation <code>R</code> as follows:</p>
+<p>For example, the <a href="#COHN-GOTTS">COHN-GOTTS</a> model of indeterminate regions distinguishes 46 topologically distinct relations between egg-yolk regions (see below).</p>
+</div>
+<div id="fig-bb" class="imageblock text-center">
+<div class="content">
+<img src="img/egg-yolk-46.png" alt="egg yolk 46" width="50%">
+</div>
+<div class="title">Figure 6. The 46 distinct relations between two egg-yolk relations, from <a href="#COHN-GOTTS">COHN-GOTTS</a>.</div>
+</div>
+<div class="paragraph">
+<p>In turn, this results in 13 distinct clusters of RCC5 relations between two egg yolk regions, given all possible "precisifications" of their boundaries, shown below.</p>
+</div>
+<div id="fig-bb" class="imageblock text-center">
+<div class="content">
+<img src="img/egg-yolk-cn.png" alt="egg yolk cn" width="50%">
+</div>
+<div class="title">Figure 7. Conceptual neighborhood of RCC5 relations between 46 topologically distinct egg-yolk relations, from <a href="#COHN-GOTTS">COHN-GOTTS</a>.</div>
+</div>
+<div class="paragraph">
+<p>Based on this result, a minimal method for topological relation computation based on the simple egg-yolk model of indeterminate regions by and adopting a simple three-valued interpretation of "intersects" (i.e., definitely intersects, possibly intersects, definitely doesn&#8217;t intersect) is as follows:</p>
+</div>
+<div class="paragraph">
+<p>Given twe egg-yolk regions <em>A</em> and <em>B</em></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Determine the level of measurement <code>B_l</code> for the geometries of <code>B</code></p>
-<div class="olist lowerroman">
-<ol class="lowerroman" type="i">
+<p>Compute the unique topological relation <em>R</em> between <em>A</em> and <em>B</em> (numbered 1 .. 46)</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
 <li>
-<p>If <code>B_l</code> is <a href="#_levels_of_measurement">nominal</a>,</p>
-<div class="olist upperalpha">
-<ol class="upperalpha" type="A">
-<li>
-<p>For each geometry <code>BG_i</code> of <code>B</code>, calculate <code>A R BG_i</code> for each geometry</p>
+<p>If <em>R</em> is in {1} then <em>A</em> definitely doesn&#8217;t intersect <em>B</em></p>
 </li>
 <li>
-<p>If any <code>A R BG_i</code> is <code>true</code> then <code>A R B</code> is <code>true</code></p>
+<p>If <em>R</em> is in {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 19, 28, 34, 42} then <em>A</em> possibly intersects <em>B</em></p>
 </li>
 <li>
-<p>Else it is <code>false</code></p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>If <code>B_l</code> is <a href="#_levels_of_measurement">ordinal</a>,</p>
-<div class="olist upperalpha">
-<ol class="upperalpha" type="A">
-<li>
-<p>For each geometry <code>BG_i</code> of <code>B</code>, calculate <code>A R BG_i</code> for each geometry in order</p>
-</li>
-<li>
-<p>Starting with the first geometry <code>BG_1</code> and proceeding to the last, <code>BG_N</code>, calculate <code>A R BG_i</code> for each geometry</p>
-<div class="olist upperroman">
-<ol class="upperroman" type="I">
-<li>
-<p>If</p>
+<p>Else <em>A</em> definitely intersects <em>B</em></p>
 </li>
 </ol>
 </div>
 </li>
 </ol>
 </div>
-</li>
-<li>
-<p>If <code>B_l</code> is <a href="#_levels_of_measurement">interval</a>,</p>
-</li>
-<li>
-<p>If <code>B_l</code> is <a href="#_levels_of_measurement">ratio</a>,</p>
-</li>
-</ol>
 </div>
-</li>
-</ol>
-</div>
-<table id="table-order" class="tableblock frame-all grid-all stripes-even stretch">
-<caption class="title">Table 1. Order of geometry calculation per function</caption>
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">SF Relation</th>
-<th class="tableblock halign-left valign-top">Order</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family">equals</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family">disjoint</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">lowest to highest</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family">intersects</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">highest to lowest</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family">touches</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">lowest to highest</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family">within</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">lowest to highest</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family">contains</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">highest to lowest</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family">overlaps</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">any</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family">crosses</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">any</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_model_resources"><a class="anchor" href="#_model_resources"></a>4.7. Model resources</h3>
-<div class="paragraph">
-<p>This document is this model&#8217;s "Specification" which is its authoritative, human-readable, definition document. This model also contains other resources with other roles:</p>
-</div>
-<table class="tableblock frame-all grid-all stripes-even" style="width: 75%;">
-<colgroup>
-<col style="width: 28.5714%;">
-<col style="width: 14.2857%;">
-<col style="width: 57.1429%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Resource</th>
-<th class="tableblock halign-left valign-top">Role</th>
-<th class="tableblock halign-left valign-top">Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://w3id.org/suff/ont.ttl">Ontology</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Schema</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The technical, machine-readable, version of this model</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#Supporting Vocabularies">[Supporting Vocabularies]</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Vocabulary</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The codelist vocabularies developed for this model and links to others defined elsewhere but expected to be used by this model</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#AnnexA">[AnnexA]</a> &amp; <a href="https://w3id.org/suff/validator.ttl">Validator</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Validation</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The machine-readable validator file used to validate data claiming conformance to this model</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#AnnexB">[AnnexB]</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Example</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Examples of data conforming, and some not conforming, to this model</p></td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 </div>
@@ -1107,7 +1001,7 @@ ex:indigenous-homeland-x
 <div class="content">
 <img src="img/overview.svg" alt="overview">
 </div>
-<div class="title">Figure 4. Overview of this model showing major elements</div>
+<div class="title">Figure 8. Overview of this model showing major elements</div>
 </div>
 <div class="sect2">
 <h3 id="Classes"><a class="anchor" href="#Classes"></a>5.1. Classes</h3>
@@ -1675,7 +1569,7 @@ PREFIX sdo: &lt;https://schema.org/&gt;
 <p>A simple listing of that vocabulary is also given below.</p>
 </div>
 <div class="sect3">
-<h4 id="_levels_of_measurement"><a class="anchor" href="#_levels_of_measurement"></a>5.3.1. Levels of Measurement</h4>
+<h4 id="_levels_of_measurement_2"><a class="anchor" href="#_levels_of_measurement_2"></a>5.3.1. Levels of Measurement</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1746,9 +1640,29 @@ PREFIX sdo: &lt;https://schema.org/&gt;
 <dd>
 <p>Standards Australia. <em>AS/NZS 4819:2011 Rural and urban addressing</em></p>
 </dd>
+<dt class="hdlist1"><a id="BJORKE"></a> BJORKE</dt>
+<dd>
+<p>Bjørke, J.T. Topological relations between fuzzy regions: Derivation of verbal terms. <em>Fuzzy sets and systems</em> 141.3 (2004): 449-467.</p>
+</dd>
+<dt class="hdlist1"><a id="BURROUGH-FRANK"></a> BURROUGH-FRANK</dt>
+<dd>
+<p>Burrough, P.A. and Frank, A.U. (Eds.) <em>Geographic Objects with Indeterminate Boundaries</em>. CRC Press: Boca Raton, FL (1996).  <a href="https://doi.org/10.1201/9781003062660" class="bare">https://doi.org/10.1201/9781003062660</a></p>
+</dd>
 <dt class="hdlist1"><a id="CNM"></a> CNM</dt>
 <dd>
 <p>Australian Government Linked Data Working Group. <em>Compound Naming Model</em>. Semantic Web data model (2023). <a href="https://linked.data.gov.au/def/cn" class="bare">https://linked.data.gov.au/def/cn</a></p>
+</dd>
+<dt class="hdlist1"><a id="CLEMENTINI-FELICE"></a> CLEMENTINI-FELICE</dt>
+<dd>
+<p>Clementini, E. and Di Felice, P. Approximate topological relations. <em>International Journal of Approximate Reasoning</em> 16.2 (1997): 173-204.</p>
+</dd>
+<dt class="hdlist1"><a id="COHN-GOTTS"></a> COHN-GOTTS</dt>
+<dd>
+<p>Cohn, A.G. and Gotts, N.M. The "egg-yolk" representation of regions with indeterminate boundaries. In <em>Geographic objects with indeterminate boundaries</em>. CRC Press (1996). 171-187.</p>
+</dd>
+<dt class="hdlist1"><a id="DUCKHAM-BOOK"></a> DUCKHAM-BOOK</dt>
+<dd>
+<p>Duckham, M., Sun, Q.C., Worboys, M.F., <em>GIS: A computing perspective</em>, 3rd Ed. CRC Press: Boca Raton, FL (2023). <a href="http://doi.org/10.1201/9780429168093" class="bare">http://doi.org/10.1201/9780429168093</a></p>
 </dd>
 <dt class="hdlist1"><a id="CONNEGP"></a> CONNEGP</dt>
 <dd>
@@ -1810,6 +1724,10 @@ PREFIX sdo: &lt;https://schema.org/&gt;
 <dd>
 <p>World Wide Web Consortium, <em>RDF 1.2 Schema</em>, W3C First Public Working Draft (16 May 2023). <a href="https://www.w3.org/TR/rdf12-schema/" class="bare">https://www.w3.org/TR/rdf12-schema/</a></p>
 </dd>
+<dt class="hdlist1"><a id="ROY-STELL"></a> ROY-STELL</dt>
+<dd>
+<p>Roy, A.J. and Stell, J.G. Spatial relations between indeterminate regions. <em>International Journal of Approximate Reasoning</em> 27.3 (2001): 205-234.</p>
+</dd>
 <dt class="hdlist1"><a id="SDO"></a> SDO</dt>
 <dd>
 <p>W3C Schema.org Community Group, <em>schema.org</em>. Community ontology (2015). <a href="https://schema.org" class="bare">https://schema.org</a></p>
@@ -1830,6 +1748,18 @@ PREFIX sdo: &lt;https://schema.org/&gt;
 <dd>
 <p>World Wide Web Consortium, <em>RDF 1.1 Turtle Terse RDF Triple Language</em>, W3C Recommendation (25 February 2014). <a href="https://www.w3.org/TR/turtle/" class="bare">https://www.w3.org/TR/turtle/</a></p>
 </dd>
+<dt class="hdlist1"><a id="WINTER"></a> WINTER</dt>
+<dd>
+<p>Winter, S. Uncertain topological relations between imprecise regions. <em>International Journal of Geographical Information Science</em> 14.5 (2000): 411-430.</p>
+</dd>
+<dt class="hdlist1"><a id="WORBOYS-CEUS"></a> WORBOYS-CEUS</dt>
+<dd>
+<p>Worboys, M.F., Computation with imprecise geospatial data. <em>Computers, Environment and Urban Systems</em> 22.2 (1998): 85-106. <a href="https://doi.org/10.1016/S0198-9715(98)00023-4" class="bare">https://doi.org/10.1016/S0198-9715(98)00023-4</a></p>
+</dd>
+<dt class="hdlist1"><a id="WORBOYS-CLEMENTINI"></a> WORBOYS-CLEMENTINI</dt>
+<dd>
+<p>Worboys, M.F. and Clementini, E., Integration of imperfect spatial information. <em>Journal of Visual Languages &amp; Computing</em> 12.1 (2001): 61-80.https://doi.org/10.1006/jvlc.2000.0187</p>
+</dd>
 <dt class="hdlist1"><a id="XSD"></a> XSD</dt>
 <dd>
 <p>World Wide Web Consortium, <em>XML Schema Part 2: Datatypes, Second Edition</em>, W3C Recommendation (28 October 2004). <a href="http://www.w3.org/TR/xmlschema-2/" class="bare">http://www.w3.org/TR/xmlschema-2/</a>.</p>
@@ -1844,10 +1774,13 @@ PREFIX sdo: &lt;https://schema.org/&gt;
 <div class="footnote" id="_footnotedef_1">
 <a href="#_footnoteref_1">1</a>. See the following ESRI product video at 8:03: <a href="https://www.esri.com/arcgis-blog/products/arcgis-pro/mapping/how-to-visualize-uncertainty-for-lines/" class="bare">https://www.esri.com/arcgis-blog/products/arcgis-pro/mapping/how-to-visualize-uncertainty-for-lines/</a>
 </div>
+<div class="footnote" id="_footnotedef_2">
+<a href="#_footnoteref_2">2</a>. We note, Steven&#8217;s classic model recognises four levels of measurement, <em>Nominal</em>, <em>Ordinal</em>, <em>Integer</em> or <em>Ratio</em> (<a href="#KIRCH">KIRCH</a>). However, Steven&#8217;s four levels of measurement are acknowledged to not provide a consistent representation of spatial data or uncertainty. Probabilities, for example, with two fixed points at 0 and 1, do not fit comfortably into any of Stevens' levels. Spatial densities, like population density, also don&#8217;t fit well. Densities have one fixed point (zero) and can be compared like a ratio (e.g., 200 per square kilometer is twice as dense as 100 per square kilometer). But unlike a ratio, it is not in general possible to add population densities together (see <a href="#DUCKHAM-BOOK">DUCKHAM-BOOK</a> for further information). Hence, while we follow the spirit, we do not follow the detail of Steven&#8217;s four levels.
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-08-07 05:24:35 UTC
+Last updated 2024-08-10 13:04:07 UTC
 </div>
 </div>
 </body>
