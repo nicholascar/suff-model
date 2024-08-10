@@ -2,7 +2,7 @@
 
 === Abstract
 
-This is a Semantic Web model that builds on elements of the GeoSPARQL 1.1 ontology to cater for the representation of spatial uncertainty allowing for deterministic fuzzy visualisations and probabilistic topological functions.
+This is a Semantic Web model that builds on elements of the GeoSPARQL 1.1 ontology to represent uncertainty in the location of geometric features, supporting cartographic representations as well as analytical functions.
 
 === Namespaces
 

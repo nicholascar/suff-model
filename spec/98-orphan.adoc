@@ -1,0 +1,52 @@
+==== Default method for approximate topological relation computation
+
+An alternative default method to calculate the https://docs.ogc.org/is/22-047r1/22-047r1.html#sf_relations[Simple Features relations] between features whose location is uncertain and represented using elements from this model is described below. 
+
+For a spatial feature `A` with certain position - a single geometry - and spatial feature `B` with uncertain geometry - as conveyed by this model - calculate a simple feature relation `R` as follows:
+
+. Determine the level of measurement `B_l` for the geometries of `B`
+... If `B_l` is <<Levels of Measurement, nominal>>,
+.... For each geometry `BG_i` of `B`, calculate `A R BG_i` for each geometry
+.... If any `A R BG_i` is `true` then `A R B` is `true`
+.... Else it is `false`
+... If `B_l` is <<Levels of Measurement, ordinal>>,
+.... For each geometry `BG_i` of `B`, calculate `A R BG_i` for each geometry in order
+
+
+
+
+.... Starting with the first geometry `BG_1` and proceeding to the last, `BG_N`, calculate `A R BG_i` for each geometry
+..... If
+... If `B_l` is <<Levels of Measurement, interval>>,
+... If `B_l` is <<Levels of Measurement, ratio>>,
+
+[[table-order]]
+.Order of geometry calculation per function
+|===
+| SF Relation | Order
+
+| https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family[equals] | -
+| https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family[disjoint] | lowest to highest
+| https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family[intersects] | highest to lowest
+| https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family[touches] | lowest to highest
+| https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family[within] | lowest to highest
+| https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family[contains] | highest to lowest
+| https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family[overlaps] | any
+| https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family[crosses] | any
+|===
+
+
+
+=== Model resources
+
+This document is this model's "Specification" which is its authoritative, human-readable, definition document. This model also contains other resources with other roles:
+
+[width="75%", cols="2,1,4"]
+|===
+| Resource | Role | Notes
+
+| https://w3id.org/suff/ont.ttl[Ontology] | _Schema_ | The technical, machine-readable, version of this model
+| <<Supporting Vocabularies>> | _Vocabulary_ | The codelist vocabularies developed for this model and links to others defined elsewhere but expected to be used by this model
+| <<AnnexA>> & https://w3id.org/suff/validator.ttl[Validator] | _Validation_ | The machine-readable validator file used to validate data claiming conformance to this model
+| <<AnnexB>> | _Example_ | Examples of data conforming, and some not conforming, to this model
+|===

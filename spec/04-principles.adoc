@@ -1,115 +1,65 @@
 == Principles
 
-This section give a series of principles describing the scope of what this model is intending to offer.
+This section give a series of principles describing the scope of what this model is aims to offer.
 
-Some of these principles are conceptual and may not be computationally tested against data created in accordance with this model. Other principles are and lead on to rules in the <<Rules>> section.
+=== Uncertainty in location, represented using geometry
 
+This model only directly addresses the representation of uncertainty in the location of spatial features, where that uncertainty can be captured using a set of geometries. 
 
-=== Uncertainty in position only
+The model does not address uncertainty in the values of other attributes or properties of features. Other ontologies do exist to provide for the representation of measurement uncertainty, including simple models such as <<SDO, schema.org>> include properties such as https://schema.org/marginOfError[marginOfError] for this purpose.
 
-This model only directly addresses uncertainty in the position of spatial features. It does not address uncertainty in the values of other feature properties. For example, if a map of average daily temperature for a region was modelled using GeoSPARQL 1.1 and this model's elements, uncertainty in the measurement of the temperature values themselves would be out of scope.
-
-NOTE:: Many other ontologies provide for the representation of measurement uncertain and simple models such as <<SDO, schema.org>> include properties such as https://schema.org/marginOfError[marginOfError] for this purpose.
-
-
-=== Uncertainty not in resolution or accuracy
-
-This model is not intended to represent spatial resolution or accuracy of positions (geometry elements): these are already representable with elements from <<GEO, GeoSPARQL>>, see:
+Further, this model is not intended to be used to represent uncertainty in location when a simple property associated with a single geometry would suffice. Such simple representations are already accessible through elements from <<GEO, GeoSPARQL>>, see:
 
 * https://docs.ogc.org/is/22-047r1/22-047r1.html#_property_geohasspatialresolution[geo:hasSpatialResolution]
 * https://docs.ogc.org/is/22-047r1/22-047r1.html#_property_geohasspatialaccuracy[geo:hasSpatialAccuracy]
 
-This model aims to allow a user to represent specific values for uncertainty of position for a feature, rather than uncertainty which is unknown to them, perhaps due to the tolerance of instruments used to make position measurements.
+=== Core mechanism
 
+Uncertainty in the location of a feature is captured by linking the feature not to one geometry but to multiple - a geometry collection. Each geometry in the collection conveys part of the representation of the feature's location together with a value either being given in the data or inferrable due to the geometry's relative position in the collection.
 
-=== Deterministic interpretation
+The interpretation of the value is partly captured through three levels of measurement, as follows. 
 
-The aim of this model is to allow a user to convey a defined amount of uncertainty in data and this amount is unambiguous: all users of the data will be able to derive the same amount.
+==== Levels of measurement
 
+The SUFF model recognises three levels of measurementfootnote:[We note, Steven's classic model recognises four levels of measurement, _Nominal_, _Ordinal_, _Integer_ or _Ratio_ (<<KIRCH>>). However, Steven's four levels of measurement are acknowledged to not provide a consistent representation of spatial data or uncertainty. Probabilities, for example, with two fixed points at 0 and 1, do not fit comfortably into any of Stevens' levels. Spatial densities, like population density, also don't fit well. Densities have one fixed point (zero) and can be compared like a ratio (e.g., 200 per square kilometer is twice as dense as 100 per square kilometer). But unlike a ratio, it is not in general possible to add population densities together (see <<DUCKHAM-BOOK>> for further information). Hence, while we follow the spirit, we do not follow the detail of Steven's four levels.] 
+as defined in the <<Levels of Measurement, Levels of Measurement>> vocabulary in the <<Supporting Vocabularies>> section of this model. 
 
-=== XXX
+The three levels defined are:
 
-This model defines a number of rules that define the manner in which the spatial representation of features that contain uncertainty is to be interpreted.
+. <<Levels of Measurement, nominal>>: which differentiates between items based only on their names or category
+. <<Levels of Measurement, ordinal>>: which differentiates between items and assigns a (total) order on those items.  
+. <<Levels of Measurement, quantity>>: which differentiates between items and assigns a magnitude to those items.  
 
-Uncertainty in position is conveyed by linking the feature not to one geometry but to multiple - a geometry collection. Each geometry in the collection conveys the certainty of the feature's location at its boundary with the value either being given in the data or inferrable due to the geometry's relative position in the collection.
+The level of measurement will be indicated either directly by the predicate <<levelOfMeasurement, level of measurement>> on a <<GeometryCollection, Geometry Collection>> instance, or it will be divined from other properties of the geometries. The default value is _Nominal_.
 
-A series of rules, given in the following subsections, define how certainty at each geometry in a collection is to be obtained. These rules are based on the instructions on the level of measurement <<KIRCH>> relationship between the geometries in a geometry collection contained. The level of measurement will be one of _Nominal_, _Ordinal_, _Integer_ or _Ratio_, as defined in the <<Levels of Measurement, Levels of Measurement>> vocabulary in the <<Supporting Vocabularies>> section of this model. It will either be indicated directly by the predicate <<levelOfMeasurement, level of measurement>> on a <<GeometryCollection, Geometry Collection>> instance, or it will be divined from other properties of the geometries. The default value is _Nominal_.
-
-==== Obtaining the Level of Measurement
-
-The following reasoning is to be used to determine the level of measurement of a Geometry Collection.
-
-.Use of <<levelOfMeasurement, level of measurement>> predicate
-..If a <<GeometryCollection, Geometry Collection>> instance indicates its member <<Geometry, Geometries>> are related by the <<levelOfMeasurement, level of measurement>> to be a particular level of measurement, that value is to be used
-
-==== Rule: Nominal geometries
-
-
-
-==== Rule: Ordinal geometries
-
-==== Rule: Interval geometries
-
-==== Rule: Ratio geometries
-
-=== Feature display
-
-
-=== Probabilistic Topological Functions
+=== Approximate topological relations
 
 The <<GEO, GeoSPARQL>> standard provides both an ontology which defines spatial elements and predicates to indicate topological relationships between them and also function definitions that can be used to calculate those predicates.
 
 For example, the predicate https://docs.ogc.org/is/22-047r1/22-047r1.html#sf_relations[`geo:sfWithin`] indicated that its subject is spatially _within_ its object where _within_ is the Simple Features Within relation defined by <<OGC-06-103r4>>. The related GeoSPARQL function is http://www.opengis.net/def/function/geosparql/sfWithin[`geof:sfWithin] which defines the parameters and results from the function used to calculate the `geo:sfWithin` relation between two spatial objects.
 
-This model indicates how to calculate the https://docs.ogc.org/is/22-047r1/22-047r1.html#sf_relations[Simple Features relations] between features whose position is uncertain and represented using elements from this model. The general method is described below and specific topological relation calculations follow.
+One objective of this model is to enable the definition of rules that propagate uncertainty in location through to levels of certainty in topological relation. There are an enormous range of different possibilities when computing such a relation in the literature, including <<COHN-GOTTS>>, <<CLEMENTINI-FELICE>>, <<BJORKE>>, <<WINTER>>, <<ROY-STELL>> to name but a few. 
 
-==== General method for probabilistic topological function calculation
+==== Minimal method for approximate topological relation computation
 
-For a spatial feature `A` with certain position - a single geometry - and spatial feature `B` with uncertain geometry - as conveyed by this model - calculate a simple feature relation `R` as follows:
+For example, the <<COHN-GOTTS>> model of indeterminate regions distinguishes 46 topologically distinct relations between egg-yolk regions (see below). 
 
-. Determine the level of measurement `B_l` for the geometries of `B`
-... If `B_l` is <<Levels of Measurement, nominal>>,
-.... For each geometry `BG_i` of `B`, calculate `A R BG_i` for each geometry
-.... If any `A R BG_i` is `true` then `A R B` is `true`
-.... Else it is `false`
-... If `B_l` is <<Levels of Measurement, ordinal>>,
-.... For each geometry `BG_i` of `B`, calculate `A R BG_i` for each geometry in order
+[id="fig-bb",width="50%",align="center"]
+.The 46 distinct relations between two egg-yolk relations, from <<COHN-GOTTS>>.
+image::img/egg-yolk-46.png[]
 
+In turn, this results in 13 distinct clusters of RCC5 relations between two egg yolk regions, given all possible "precisifications" of their boundaries, shown below. 
 
+[id="fig-bb",width="50%",align="center"]
+.Conceptual neighborhood of RCC5 relations between 46 topologically distinct egg-yolk relations, from <<COHN-GOTTS>>.
+image::img/egg-yolk-cn.png[]
 
+Based on this result, a minimal method for topological relation computation based on the simple egg-yolk model of indeterminate regions by and adopting a simple three-valued interpretation of "intersects" (i.e., definitely intersects, possibly intersects, definitely doesn't intersect) is as follows:
 
-.... Starting with the first geometry `BG_1` and proceeding to the last, `BG_N`, calculate `A R BG_i` for each geometry
-..... If
-... If `B_l` is <<Levels of Measurement, interval>>,
-... If `B_l` is <<Levels of Measurement, ratio>>,
+Given twe egg-yolk regions _A_ and _B_
 
-[[table-order]]
-.Order of geometry calculation per function
-|===
-| SF Relation | Order
+. Compute the unique topological relation _R_ between _A_ and _B_ (numbered 1 .. 46)
+.. If _R_ is in {1} then _A_ definitely doesn't intersect _B_
+.. If _R_ is in {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 19, 28, 34, 42} then _A_ possibly intersects _B_
+.. Else _A_ definitely intersects _B_
 
-| https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family[equals] | -
-| https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family[disjoint] | lowest to highest
-| https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family[intersects] | highest to lowest
-| https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family[touches] | lowest to highest
-| https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family[within] | lowest to highest
-| https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family[contains] | highest to lowest
-| https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family[overlaps] | any
-| https://docs.ogc.org/is/22-047r1/22-047r1.html#_simple_features_relation_family[crosses] | any
-|===
-
-
-
-=== Model resources
-
-This document is this model's "Specification" which is its authoritative, human-readable, definition document. This model also contains other resources with other roles:
-
-[width="75%", cols="2,1,4"]
-|===
-| Resource | Role | Notes
-
-| https://w3id.org/suff/ont.ttl[Ontology] | _Schema_ | The technical, machine-readable, version of this model
-| <<Supporting Vocabularies>> | _Vocabulary_ | The codelist vocabularies developed for this model and links to others defined elsewhere but expected to be used by this model
-| <<AnnexA>> & https://w3id.org/suff/validator.ttl[Validator] | _Validation_ | The machine-readable validator file used to validate data claiming conformance to this model
-| <<AnnexB>> | _Example_ | Examples of data conforming, and some not conforming, to this model
-|===

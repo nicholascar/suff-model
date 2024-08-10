@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 290.64 184.85">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2 {
+        stroke: #231f20;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-3 {
+        font-size: 10px;
+      }
+
+      .cls-3, .cls-4, .cls-5 {
+        fill: #231f20;
+      }
+
+      .cls-3, .cls-5 {
+        font-family: OpenSans-Regular, 'Open Sans';
+      }
+
+      .cls-4 {
+        stroke-width: 0px;
+      }
+
+      .cls-5 {
+        font-size: 12px;
+      }
+
+      .cls-2 {
+        fill: #f5ddea;
+      }
+    </style>
+  </defs>
+  <rect class="cls-2" x="80.5" y=".5" width="105" height="25.91"/>
+  <text class="cls-5" transform="translate(100.48 18.01)"><tspan x="0" y="0">Uncertainty</tspan></text>
+  <rect class="cls-2" x=".5" y="70.5" width="105" height="25.91"/>
+  <text class="cls-5" transform="translate(23.25 88.01)"><tspan x="0" y="0">Inaccuracy</tspan></text>
+  <rect class="cls-2" x="160.5" y="70.5" width="105" height="25.91"/>
+  <text class="cls-5" transform="translate(180.19 88.01)"><tspan x="0" y="0">Imprecision</tspan></text>
+  <rect class="cls-2" x="160.5" y="140.5" width="105" height="25.91"/>
+  <text class="cls-5" transform="translate(182.98 158.01)"><tspan x="0" y="0">Vagueness</tspan></text>
+  <g>
+    <line class="cls-1" x1="53" y1="70.5" x2="108.19" y2="29.94"/>
+    <polygon class="cls-4" points="108.12 34.59 107.19 30.68 103.73 28.62 113 26.41 108.12 34.59"/>
+  </g>
+  <g>
+    <line class="cls-1" x1="213" y1="140.5" x2="213" y2="102.38"/>
+    <polygon class="cls-4" points="216.7 105.19 213 103.61 209.3 105.19 213 96.41 216.7 105.19"/>
+  </g>
+  <g>
+    <line class="cls-1" x1="213" y1="70.5" x2="157.81" y2="29.94"/>
+    <polygon class="cls-4" points="162.27 28.62 158.81 30.68 157.88 34.59 153 26.41 162.27 28.62"/>
+  </g>
+  <text class="cls-3" transform="translate(145.19 182.14)"><tspan x="0" y="0">“existence of boundary cases”</tspan></text>
+  <text class="cls-3" transform="translate(6.06 111.72)"><tspan x="0" y="0">“lack of correctness”</tspan></text>
+  <text class="cls-3" transform="translate(225.03 111.72)"><tspan x="0" y="0">“lack of detail”</tspan></text>
+</svg>
