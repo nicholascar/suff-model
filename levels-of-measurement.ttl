@@ -1,75 +1,227 @@
-PREFIX : <https://linked.data.gov.au/def/levels-of-measurement/>
-PREFIX cs: <https://linked.data.gov.au/def/levels-of-measurement>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX schema: <https://schema.org/>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+@prefix : <https://linked.data.gov.au/def/levels-of-measurement/> .
+@prefix cs: <https://linked.data.gov.au/def/levels-of-measurement> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema: <https://schema.org/> .
+@base <http://www.w3.org/2002/07/owl#> .
 
-:interval
-    a skos:Concept ;
-    skos:definition "The interval type allows for defining the degree of difference between measurements, but not the ratio between measurements"@en ;
-    skos:inScheme cs: ;
-    skos:prefLabel "Interval"@en ;
-    skos:topConceptOf cs: ;
-    schema:citation "https://en.wikipedia.org/wiki/Level_of_measurement"^^xsd:anyURI ;
-.
+[ rdf:type owl:Ontology
+ ] .
 
-:nominal
-    a skos:Concept ;
-    skos:definition "The nominal level differentiates between items or subjects based only on their names or (meta-)categories and other qualitative classifications they belong to; thus dichotomous data involves the construction of classifications as well as the classification of items"@en ;
-    skos:inScheme cs: ;
-    skos:prefLabel "Nominal"@en ;
-    skos:topConceptOf cs: ;
-    schema:citation "https://en.wikipedia.org/wiki/Level_of_measurement"^^xsd:anyURI ;
-.
+#################################################################
+#    Annotation properties
+#################################################################
 
-:ordinal
-    a skos:Concept ;
-    skos:definition "The ordinal level allows for rank order (1st, 2nd, 3rd, etc.) by which data can be sorted but still does not allow for a relative degree of difference between them"@en ;
-    skos:inScheme cs: ;
-    skos:prefLabel "Ordinal"@en ;
-    skos:topConceptOf cs: ;
-    schema:citation "https://en.wikipedia.org/wiki/Level_of_measurement"^^xsd:anyURI ;
-.
+###  http://www.w3.org/2004/02/skos/core#broader
+skos:broader rdf:type owl:AnnotationProperty .
 
-:ratio
-    a skos:Concept ;
-    skos:definition "The ratio type takes its name from the fact that measurement is the estimation of the ratio between a magnitude of a continuous quantity and a unit of measurement of the same kind"@en ;
-    skos:inScheme cs: ;
-    skos:prefLabel "Ratio"@en ;
-    skos:topConceptOf cs: ;
-    schema:citation "https://en.wikipedia.org/wiki/Level_of_measurement"^^xsd:anyURI ;
-.
 
-<https://orcid.org/0000-0002-8742-7730>
-    a schema:Person ;
-    schema:affiliation <https://linked.data.gov.au/org/anu> ;
-    schema:email "nicholas.car@anu.edu.au"^^xsd:anyURI ;
-    schema:name "Nicholas J. Car" ;
-    schema:url "https://researchers.anu.edu.au/researchers/car-n"^^xsd:anyURI ;
-.
+###  http://www.w3.org/2004/02/skos/core#broaderTransitive
+skos:broaderTransitive rdf:type owl:AnnotationProperty .
 
-<https://linked.data.gov.au/org/anu>
-    a schema:Organization ;
-    schema:name "Australian National University" ;
-    schema:url "https://linked.data.gov.au/org/anu"^^xsd:anyURI ;
-.
 
-cs:
-    a skos:ConceptScheme ;
-    owl:versionIRI :1.0 ;
-    owl:versionInfo "1.0" ;
-    skos:definition "This vocabulary defines level of measurement that are classifications that describes the nature of information within the values assigned to variables"@en ;
-    skos:hasTopConcept
-        :interval ,
-        :nominal ,
-        :ordinal ,
-        :ratio ;
-    skos:historyNote "This vocabulary was created for use within the SUFFER Ontology (https://w3id.org/suffer/) to allow allow clients of semantic spatial data to understand some elements of the display of geometries within a geometry collection." ;
-    skos:prefLabel "Levels of Measurement"@en ;
-    skos:usageNote "Despite the spatial data motivation for the creation of this vocabulary, it is generic in its representation of Levels of Measurement information and can be used for many purposes other than spatial information" ;
-    schema:creator <https://orcid.org/0000-0002-8742-7730> ;
-    schema:dateCreated "2024-03-15"^^xsd:date ;
-    schema:dateModified "2024-03-15"^^xsd:date ;
-    schema:publisher <https://linked.data.gov.au/org/anu> ;
-.
+###  http://www.w3.org/2004/02/skos/core#definition
+skos:definition rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#hasTopConcept
+skos:hasTopConcept rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#historyNote
+skos:historyNote rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#inScheme
+skos:inScheme rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#narrower
+skos:narrower rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#narrowerTransitive
+skos:narrowerTransitive rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#prefLabel
+skos:prefLabel rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#topConceptOf
+skos:topConceptOf rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#usageNote
+skos:usageNote rdf:type owl:AnnotationProperty .
+
+
+###  https://schema.org/affiliation
+schema:affiliation rdf:type owl:AnnotationProperty .
+
+
+###  https://schema.org/citation
+schema:citation rdf:type owl:AnnotationProperty .
+
+
+###  https://schema.org/creator
+schema:creator rdf:type owl:AnnotationProperty .
+
+
+###  https://schema.org/dateCreated
+schema:dateCreated rdf:type owl:AnnotationProperty .
+
+
+###  https://schema.org/dateModified
+schema:dateModified rdf:type owl:AnnotationProperty .
+
+
+###  https://schema.org/email
+schema:email rdf:type owl:AnnotationProperty .
+
+
+###  https://schema.org/name
+schema:name rdf:type owl:AnnotationProperty .
+
+
+###  https://schema.org/publisher
+schema:publisher rdf:type owl:AnnotationProperty .
+
+
+###  https://schema.org/url
+schema:url rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.w3.org/2004/02/skos/core#Concept
+skos:Concept rdf:type owl:Class .
+
+
+###  http://www.w3.org/2004/02/skos/core#ConceptScheme
+skos:ConceptScheme rdf:type owl:Class .
+
+
+###  https://schema.org/Organization
+schema:Organization rdf:type owl:Class .
+
+
+###  https://schema.org/Person
+schema:Person rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://linked.data.gov.au/def/levels-of-measurement
+<https://linked.data.gov.au/def/levels-of-measurement> rdf:type owl:NamedIndividual ,
+                                                                skos:ConceptScheme ;
+                                                       owl:versionInfo "1.0" ;
+                                                       skos:definition "This vocabulary defines level of measurement that are classifications that describes the nature of information within the values assigned to variables"@en ;
+                                                       skos:hasTopConcept :interval ,
+                                                                          :nominal ,
+                                                                          :ordinal ,
+                                                                          :ratio ;
+                                                       skos:historyNote "This vocabulary was created for use within the SUFFER Ontology (https://w3id.org/suffer/) to allow allow clients of semantic spatial data to understand some elements of the display of geometries within a geometry collection." ;
+                                                       skos:prefLabel "Levels of Measurement"@en ;
+                                                       skos:usageNote "Despite the spatial data motivation for the creation of this vocabulary, it is generic in its representation of Levels of Measurement information and can be used for many purposes other than spatial information" ;
+                                                       schema:creator <https://orcid.org/0000-0002-8742-7730> ;
+                                                       schema:dateCreated "2024-03-15"^^xsd:date ;
+                                                       schema:dateModified "2024-03-15"^^xsd:date ;
+                                                       schema:publisher <https://linked.data.gov.au/org/anu> .
+
+
+###  https://linked.data.gov.au/def/levels-of-measurement/interval
+:interval rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:definition "The interval type allows for defining the degree of difference between measurements, but not the ratio between measurements"@en ;
+          skos:inScheme <https://linked.data.gov.au/def/levels-of-measurement> ;
+          skos:narrower :quantity ;
+          skos:prefLabel "Interval"@en ;
+          schema:citation "https://en.wikipedia.org/wiki/Level_of_measurement"^^xsd:anyURI .
+
+
+###  https://linked.data.gov.au/def/levels-of-measurement/nominal
+:nominal rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:definition "The nominal level differentiates between items or subjects based only on their names or (meta-)categories and other qualitative classifications they belong to; thus dichotomous data involves the construction of classifications as well as the classification of items"@en ;
+         skos:inScheme <https://linked.data.gov.au/def/levels-of-measurement> ;
+         skos:narrower :quality ;
+         skos:prefLabel "Nominal"@en ;
+         schema:citation "https://en.wikipedia.org/wiki/Level_of_measurement"^^xsd:anyURI .
+
+
+###  https://linked.data.gov.au/def/levels-of-measurement/ordinal
+:ordinal rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:definition "The ordinal level allows for rank order (1st, 2nd, 3rd, etc.) by which data can be sorted but still does not allow for a relative degree of difference between them"@en ;
+         skos:inScheme <https://linked.data.gov.au/def/levels-of-measurement> ;
+         skos:narrower :quality ;
+         skos:prefLabel "Ordinal"@en ;
+         schema:citation "https://en.wikipedia.org/wiki/Level_of_measurement"^^xsd:anyURI .
+
+
+###  https://linked.data.gov.au/def/levels-of-measurement/quality
+:quality rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:broader :nominal ,
+                      :ordinal ;
+         skos:definition "A quality is a measurement that is not quantifiable, instead having non-numeric relations with other qualities. Nominal and ordinal levels of measurement are examples of qualities."@en ;
+         skos:inScheme <https://linked.data.gov.au/def/levels-of-measurement> ;
+         skos:prefLabel "Quality"@en ;
+         skos:topConceptOf <https://linked.data.gov.au/def/levels-of-measurement> .
+
+
+###  https://linked.data.gov.au/def/levels-of-measurement/quantity
+:quantity rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader :interval ,
+                       :ratio ;
+          skos:definition "A quantity is a measurement that is numerically quantifiable. Ratio and interval measurements are quantities, as are other numerical measurements with magnitude, such as probabilities and densities."@en ;
+          skos:inScheme <https://linked.data.gov.au/def/levels-of-measurement> ;
+          skos:prefLabel "Quantity"@en ;
+          skos:topConceptOf <https://linked.data.gov.au/def/levels-of-measurement> .
+
+
+###  https://linked.data.gov.au/def/levels-of-measurement/ratio
+:ratio rdf:type owl:NamedIndividual ,
+                skos:Concept ;
+       skos:definition "The ratio type takes its name from the fact that measurement is the estimation of the ratio between a magnitude of a continuous quantity and a unit of measurement of the same kind"@en ;
+       skos:inScheme <https://linked.data.gov.au/def/levels-of-measurement> ;
+       skos:narrower :quantity ;
+       skos:prefLabel "Ratio"@en ;
+       schema:citation "https://en.wikipedia.org/wiki/Level_of_measurement"^^xsd:anyURI .
+
+
+###  https://linked.data.gov.au/org/anu
+<https://linked.data.gov.au/org/anu> rdf:type owl:NamedIndividual ,
+                                              schema:Organization ;
+                                     schema:name "Australian National University" ;
+                                     schema:url "https://linked.data.gov.au/org/anu"^^xsd:anyURI .
+
+
+###  https://orcid.org/0000-0002-8742-7730
+<https://orcid.org/0000-0002-8742-7730> rdf:type owl:NamedIndividual ,
+                                                 schema:Person ;
+                                        schema:affiliation <https://linked.data.gov.au/org/anu> ;
+                                        schema:email "nicholas.car@anu.edu.au"^^xsd:anyURI ;
+                                        schema:name "Nicholas J. Car" ;
+                                        schema:url "https://researchers.anu.edu.au/researchers/car-n"^^xsd:anyURI .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
